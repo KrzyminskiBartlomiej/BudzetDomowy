@@ -1,0 +1,18 @@
+### v1.00 List ###
+# Consider Android port
+1. Log screen
+2. Main window
+3. DockNodes:
+	- BarDock
+	- MenuDock
+	- TreeDock
+	- ChartDock
+	- TableDock
+4. Basic cost adding
+5. Exspense category
+6. Earnings category
+7. Simple database(without views)
+8. Date TreeView 
+9. Charts with specific series
+10. Table with specific information
+11. Menu with few basic categories
