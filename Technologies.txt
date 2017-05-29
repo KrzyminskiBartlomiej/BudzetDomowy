@@ -1,0 +1,6 @@
+Language: JavaSE-1.8
+IDE: Eclipse Neon.3
+Database: MySQL 5.7
+Tools: JavaFX
+Version control system: GIT(GitHub)
+App License: MIT
