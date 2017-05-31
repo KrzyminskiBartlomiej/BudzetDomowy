@@ -33,6 +33,8 @@
 ._*
 .Spotlight-V100
 .Trashes
+.metadata
+.recommenders
 ehthumbs.db
 Thumbs.db
 
