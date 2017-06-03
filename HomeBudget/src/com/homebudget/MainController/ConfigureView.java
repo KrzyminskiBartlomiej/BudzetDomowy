@@ -18,19 +18,21 @@ public class ConfigureView {
 	public static Scene logInScene;
 	public static VBox layout1;
 	public static Label logInLabel, userName, userPassword;
-	public static Button createUserButton;
-	public static GridPane logIngrid;
+	public static Label logInFailedInformation; 
+	public static Button createUserButton, logInButton, exitButton;
+	public static GridPane logIngrid, buttonsGrid;
 	public static TextField userNameField;
 	public static PasswordField userPasswordField;
 
-	// Create User window
+	// Create User window fields
 	public static Scene signUpScene;
 	public static VBox layout2;
 	public static Label createUserLabel, setUserName, setUserPassword, rewriteUserPassword;
-	public static Button createNewUser;
-	public static GridPane createUserGrid;
+	public static Button createNewUser, backToLogInScene;
+	public static GridPane createUserGrid, userButtonsGrid;
 	public static TextField setUserField, createUserPasswordField, rewriteUserPasswordField;
 
-	// Main Application window
+	// Main Application window fields
 	public static Scene applicationScene;
+	public static VBox layout3;
 }

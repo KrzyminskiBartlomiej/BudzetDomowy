@@ -12,6 +12,7 @@ INDEX VERSION 1.130+C:\Users\Krzemcio\Desktop\BudzetDomowy\BudzetDomowy\.metadat
 194205294.index
 1199826107.index
 2221491804.index
+1080586984.index
 2561179376.index
 3643810303.index
 1539866187.index
