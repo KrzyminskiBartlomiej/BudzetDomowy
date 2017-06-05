@@ -1,11 +1,6 @@
 package com.homebudget.MainController;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import com.homebudget.DataBaseHandler.DatabaseConnector;
-import com.homebudget.DataBaseHandler.DatabaseGetData;
+import com.homebudget.DataBaseHandler.DatabaseSubscribtion;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -31,7 +26,8 @@ public class LogInView {
 
 		ConfigureView.logInButton = new Button("Sign in");
 		ConfigureView.logInButton.centerShapeProperty();
-		ConfigureView.logInButton.setOnAction(e -> isTheUserExists());
+		ConfigureView.logInButton.setOnAction(e -> DatabaseSubscribtion
+				.checkCredintials(ConfigureView.userNameField.getText(), ConfigureView.userPasswordField.getText()));
 
 		ConfigureView.exitButton = new Button("Exit");
 		ConfigureView.exitButton.centerShapeProperty();
@@ -39,6 +35,7 @@ public class LogInView {
 
 		ConfigureView.logInFailedInformation = new Label("Incorrect user name or password");
 		ConfigureView.logInFailedInformation.setStyle("-fx-text-fill: red");
+		ConfigureView.logInFailedInformation.setVisible(false);
 
 		ConfigureView.logIngrid = new GridPane();
 		ConfigureView.logIngrid.setHgap(10);
@@ -50,8 +47,8 @@ public class LogInView {
 
 		ConfigureView.layout1 = new VBox(20);
 		ConfigureView.layout1.getChildren().addAll(ConfigureView.logInLabel, ConfigureView.logIngrid,
-				ConfigureView.buttonsGrid);
-		
+				ConfigureView.buttonsGrid, ConfigureView.logInFailedInformation);
+
 		ConfigureView.layout1.setAlignment(Pos.CENTER);
 		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 300, 300);
 
@@ -76,37 +73,5 @@ public class LogInView {
 		ConfigureView.window.setScene(ConfigureView.logInScene);
 		ConfigureView.window.setTitle("Home Budget 2017");
 		ConfigureView.window.show();
-	}
-
-	public static void isTheUserExists() {
-		DatabaseConnector mysqlConnect = new DatabaseConnector();
-		String sqlTestCommand = "SELECT User FROM mysql.user;";
-		Integer valueBefore;
-
-		try {
-			PreparedStatement statement = DatabaseConnector.connect().prepareStatement(sqlTestCommand);
-			ResultSet rs = statement.executeQuery();
-			DatabaseGetData.getStringData(rs);
-			valueBefore = DatabaseGetData.userName.size();
-
-			System.out.println(valueBefore);
-			DatabaseGetData.userName.add(ConfigureView.userNameField.getText());
-			System.out.println(DatabaseGetData.userName.size());
-			System.out.println(DatabaseGetData.userName);
-
-			if (valueBefore == DatabaseGetData.userName.size()) {
-				DatabaseGetData.userName.remove(ConfigureView.userNameField.getText());
-				ConfigureView.window.setScene(ConfigureView.applicationScene);
-			} else if (valueBefore != DatabaseGetData.userName.size()) {
-				DatabaseGetData.userName.remove(ConfigureView.userNameField.getText());
-				ConfigureView.layout1.getChildren().add(ConfigureView.logInFailedInformation);
-				ConfigureView.window.setScene(ConfigureView.logInScene);
-			}
-
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			mysqlConnect.disconnect();
-		}
 	}
 }

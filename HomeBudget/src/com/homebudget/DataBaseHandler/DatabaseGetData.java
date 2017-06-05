@@ -17,9 +17,10 @@ public class DatabaseGetData {
 		}
 	}
 	
-	public static void getStringData(ResultSet rs) throws SQLException{
+	public static void getStringData(ResultSet rs, String columnName) throws SQLException{
 		while(rs.next()){
-			userName.add(rs.getString("User"));
+			userName.clear();
+			userName.add(rs.getString(columnName));
 		}
 	}
 }
