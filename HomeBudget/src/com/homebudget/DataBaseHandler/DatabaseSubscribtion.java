@@ -50,7 +50,6 @@ public class DatabaseSubscribtion {
 			DatabaseGetData.getStringData(rs, "userName");
 
 			if (DatabaseGetData.userName.contains(userToBeChecked) == true) {
-				System.out.println("fjuty");
 				checkResult = true;
 			}
 		} catch (SQLException e) {
