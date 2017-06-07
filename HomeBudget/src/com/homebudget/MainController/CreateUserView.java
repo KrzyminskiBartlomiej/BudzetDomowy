@@ -10,7 +10,27 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * This public class is used to create specific create user window view and
+ * transitions to other views. It is done by initialization declared fields from
+ * ConfigureView class. It also consists a methods that are responsible for
+ * transitions to other views, secured by specific logic.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ * 
+ */
+
 public class CreateUserView {
+
+	/**
+	 * Core method responsible for ConfigureView fields initialization. Any
+	 * additional element of window must be first declared into ConfihureView
+	 * class. This manipulation provides easy access to specific fields from
+	 * outer classes.
+	 * 
+	 */
+
 	public static void setSettingsCreateUserWindow() {
 		ConfigureView.createUserLabel = new Label("Create new user");
 		ConfigureView.createUserLabel.setStyle("-fx-font-size: 12pt;");
@@ -61,6 +81,23 @@ public class CreateUserView {
 		ConfigureView.userButtonsGrid.add(ConfigureView.backToLogInScene, 1, 0);
 	}
 
+	/**
+	 * This public static method is responsible for validation new user
+	 * credentials. Secure mechanism for this method is more complicated than
+	 * mechanism used in LogInView class because of additional fields to be
+	 * handled. First step is to check if given user already exists, and then if
+	 * both given passwords are identical. User name and password must be also
+	 * longer that four characters. Any wrong credential will be occur proper
+	 * warning visible by user.
+	 * 
+	 * @param userName
+	 *            user name to be created
+	 * @param userPassword
+	 *            user password to compare with another one
+	 * @param showLabel
+	 *            label which show specific warning
+	 */
+
 	public static void createUser(String userName, String userPassword, Label showLabel) {
 		if (DatabaseSubscribtion.checkUserName(userName) == true) {
 			DatabaseSubscribtion.showWarning(showLabel, 1.8, "User already exist", "red");
@@ -68,11 +105,12 @@ public class CreateUserView {
 			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
 		} else if (DatabaseSubscribtion.checkCredintialsLength(userPassword) == false) {
 			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
-		} else if(ConfigureView.rewriteUserPasswordField.getText().equals(userPassword) == false){
+		} else if (ConfigureView.rewriteUserPasswordField.getText().equals(userPassword) == false) {
 			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Both passwords must be the same", "red");
-		} else{
-			DatabaseSubscribtion.insertNewUser(userName, userPassword);		
-			DatabaseSubscribtion.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )", "green");
-		}			
+		} else {
+			DatabaseSubscribtion.insertNewUser(userName, userPassword);
+			DatabaseSubscribtion.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )",
+					"green");
+		}
 	}
 }

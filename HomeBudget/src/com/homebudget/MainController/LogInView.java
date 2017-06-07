@@ -14,10 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This public class is used to create specific window view and transitions to
- * other views. It is done by initialization declared fields from ConfigureView
- * class. It also consists a methods that are responsible for transitions to
- * other views, secured by specific logic.
+ * This public class is used to create specific login window view and
+ * transitions to other views. It is done by initialization declared fields from
+ * ConfigureView class. It also consists a methods that are responsible for
+ * transitions to other views, secured by specific logic.
  * 
  * @author Bartlomiej Krzyminski
  * @since v1.00
