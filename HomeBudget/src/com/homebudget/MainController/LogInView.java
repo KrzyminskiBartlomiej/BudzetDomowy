@@ -26,14 +26,13 @@ public class LogInView {
 
 		ConfigureView.logInButton = new Button("Sign in");
 		ConfigureView.logInButton.centerShapeProperty();
-		ConfigureView.logInButton.setOnAction(e -> DatabaseSubscribtion
-				.checkCredintials(ConfigureView.userNameField.getText(), ConfigureView.userPasswordField.getText()));
+		ConfigureView.logInButton.setOnAction(e -> checkCredintials(ConfigureView.userNameField.getText(), ConfigureView.userPasswordField.getText()));
 
 		ConfigureView.exitButton = new Button("Exit");
 		ConfigureView.exitButton.centerShapeProperty();
 		ConfigureView.exitButton.setOnAction(e -> Platform.exit());
 
-		ConfigureView.logInFailedInformation = new Label("Incorrect user name or password");
+		ConfigureView.logInFailedInformation = new Label();
 		ConfigureView.logInFailedInformation.setStyle("-fx-text-fill: red");
 		ConfigureView.logInFailedInformation.setVisible(false);
 
@@ -66,6 +65,15 @@ public class LogInView {
 		ConfigureView.buttonsGrid.add(ConfigureView.logInButton, 0, 0);
 		ConfigureView.buttonsGrid.add(ConfigureView.createUserButton, 1, 0);
 		ConfigureView.buttonsGrid.add(ConfigureView.exitButton, 2, 0);
+	}
+
+	public static void checkCredintials(String userName, String password) {
+		if (DatabaseSubscribtion.checkPassword(userName, password) == true
+				&& DatabaseSubscribtion.checkUserName(userName) == true) {
+			ConfigureView.window.setScene(ConfigureView.applicationScene);
+		} else
+			DatabaseSubscribtion.showWarrning(ConfigureView.logInFailedInformation, 1.8,
+					"Incorrect user name or password", "red");
 	}
 
 	public static void invokeLogInWindow(Stage primaryStage) {

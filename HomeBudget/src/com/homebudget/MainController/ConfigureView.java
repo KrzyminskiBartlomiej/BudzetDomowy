@@ -18,7 +18,7 @@ public class ConfigureView {
 	public static Scene logInScene;
 	public static VBox layout1;
 	public static Label logInLabel, userName, userPassword;
-	public static Label logInFailedInformation; 
+	public static Label logInFailedInformation;
 	public static Button createUserButton, logInButton, exitButton;
 	public static GridPane logIngrid, buttonsGrid;
 	public static TextField userNameField;
@@ -27,10 +27,11 @@ public class ConfigureView {
 	// Create User window fields
 	public static Scene signUpScene;
 	public static VBox layout2;
-	public static Label createUserLabel, setUserName, setUserPassword, rewriteUserPassword;
+	public static Label createUserLabel, setUserName, setUserPassword, rewriteUserPassword, createUserFailed;
 	public static Button createNewUser, backToLogInScene;
 	public static GridPane createUserGrid, userButtonsGrid;
-	public static TextField setUserField, createUserPasswordField, rewriteUserPasswordField;
+	public static TextField setUserField;
+	public static PasswordField createUserPasswordField, rewriteUserPasswordField;
 
 	// Main Application window fields
 	public static Scene applicationScene;

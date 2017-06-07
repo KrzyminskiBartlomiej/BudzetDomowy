@@ -4,20 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.homebudget.MainController.ConfigureView;
-
 import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 public class DatabaseSubscribtion {
-	public static void checkCredintials(String userName, String password) {
-		if (checkPassword(userName, password) == true && checkUserName(userName) == true) {
-			ConfigureView.window.setScene(ConfigureView.applicationScene);
-		} else
-			showWarrning(ConfigureView.logInFailedInformation, 1.8);
-	}
-
 	public static boolean checkPassword(String checkedUser, String passwordToBeChecked) {
 		Boolean checkResult = new Boolean(false);
 		String sqlCheckPasswordQuery = "SELECT userPassword FROM usersBank WHERE userName='" + checkedUser + "';";
@@ -60,14 +51,32 @@ public class DatabaseSubscribtion {
 		return checkResult;
 	}
 
-	public static void showWarrning(Label showLabel, Double showTime) {
+	public static void insertNewUser(String userName, String userPassword) {
+		DatabaseConnector createUserConnect = new DatabaseConnector();
+		String createUserQuery = "INSERT INTO usersbank (userName, userPassword) VALUES ('" + userName + "', '" + userPassword + "');";
+		PreparedStatement statement;
+		
+		try {
+			statement = DatabaseConnector.connect().prepareStatement(createUserQuery);
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			createUserConnect.disconnect();
+		}	
+	}
+
+	public static boolean checkCredintialsLength(String stringToBeChecked) {
+		return stringToBeChecked.length() > 4 ? true : false;
+	}
+
+	public static void showWarrning(Label showLabel, Double showTime, String specificStatement, String warrningColor) {
 		PauseTransition visiblePause = new PauseTransition(Duration.seconds(showTime));
+		showLabel.setText(specificStatement);
+		showLabel.setStyle("-fx-text-fill: " + warrningColor);
 		showLabel.setVisible(true);
 		visiblePause.setOnFinished(e -> showLabel.setVisible(false));
 		visiblePause.play();
-	}
-
-	public void createUser() {
-
 	}
 }
