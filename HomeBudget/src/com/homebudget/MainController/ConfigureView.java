@@ -9,6 +9,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This public class is created to store static fields used later by specific
+ * view class. This kind of solution provides orderly access to class
+ * components. Static fields approach is enough solution for SignIn, SignUp
+ * purposes where there is no dynamic object creation needed. To make code as
+ * much readable as possible it is recommended to keep present order of
+ * declaration.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ *
+ */
+
 public class ConfigureView {
 
 	// Common fields
