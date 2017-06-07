@@ -71,10 +71,10 @@ public class DatabaseSubscribtion {
 		return stringToBeChecked.length() > 4 ? true : false;
 	}
 
-	public static void showWarrning(Label showLabel, Double showTime, String specificStatement, String warrningColor) {
+	public static void showWarning(Label showLabel, Double showTime, String specificStatement, String warningColor) {
 		PauseTransition visiblePause = new PauseTransition(Duration.seconds(showTime));
 		showLabel.setText(specificStatement);
-		showLabel.setStyle("-fx-text-fill: " + warrningColor);
+		showLabel.setStyle("-fx-text-fill: " + warningColor);
 		showLabel.setVisible(true);
 		visiblePause.setOnFinished(e -> showLabel.setVisible(false));
 		visiblePause.play();

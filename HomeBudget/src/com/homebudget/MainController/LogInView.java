@@ -13,7 +13,27 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This public class is used to create specific window view and transitions to
+ * other views. It is done by initialization declared fields from ConfigureView
+ * class. It also consists a methods that are responsible for transitions to
+ * other views, secured by specific logic.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ * 
+ */
+
 public class LogInView {
+
+	/**
+	 * Core method responsible for ConfigureView fields initialization. Any
+	 * additional element of window must be first declared into ConfihureView
+	 * class. This manipulation provides easy access to specific fields from
+	 * outer classes.
+	 * 
+	 */
+
 	public static void setSettingsLogInWindow() {
 		ConfigureView.logInLabel = new Label("Welcome into Home Budget 2017");
 		ConfigureView.logInLabel.setStyle("-fx-font-size: 12pt;");
@@ -26,14 +46,14 @@ public class LogInView {
 
 		ConfigureView.logInButton = new Button("Sign in");
 		ConfigureView.logInButton.centerShapeProperty();
-		ConfigureView.logInButton.setOnAction(e -> checkCredintials(ConfigureView.userNameField.getText(), ConfigureView.userPasswordField.getText()));
+		ConfigureView.logInButton.setOnAction(e -> checkCredentials(ConfigureView.userNameField.getText(),
+				ConfigureView.userPasswordField.getText()));
 
 		ConfigureView.exitButton = new Button("Exit");
 		ConfigureView.exitButton.centerShapeProperty();
 		ConfigureView.exitButton.setOnAction(e -> Platform.exit());
 
 		ConfigureView.logInFailedInformation = new Label();
-		ConfigureView.logInFailedInformation.setStyle("-fx-text-fill: red");
 		ConfigureView.logInFailedInformation.setVisible(false);
 
 		ConfigureView.logIngrid = new GridPane();
@@ -67,14 +87,37 @@ public class LogInView {
 		ConfigureView.buttonsGrid.add(ConfigureView.exitButton, 2, 0);
 	}
 
-	public static void checkCredintials(String userName, String password) {
+	/**
+	 * This method is responsible for validation user credentials. Secure
+	 * mechanism that allow to login into main application checks if user
+	 * identified by given password exists in database. Wrong credentials case
+	 * are indicated by warning.
+	 * 
+	 * @param userName
+	 *            user to be checked in database
+	 * @param password
+	 *            password connected with checked user
+	 * 
+	 */
+
+	public static void checkCredentials(String userName, String password) {
 		if (DatabaseSubscribtion.checkPassword(userName, password) == true
 				&& DatabaseSubscribtion.checkUserName(userName) == true) {
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
 		} else
-			DatabaseSubscribtion.showWarrning(ConfigureView.logInFailedInformation, 1.8,
+			DatabaseSubscribtion.showWarning(ConfigureView.logInFailedInformation, 1.8,
 					"Incorrect user name or password", "red");
 	}
+
+	/**
+	 * This method is used to initialize and show first window available for
+	 * user. This is start-point of application. Must be invoked in MainView at
+	 * the end of public void start method, because of static declaration of
+	 * ConfigureView fields. Different order may occur nullPointer errors.
+	 * 
+	 * @param primaryStage
+	 *            is used to set-up first window view
+	 */
 
 	public static void invokeLogInWindow(Stage primaryStage) {
 		ConfigureView.window = primaryStage;

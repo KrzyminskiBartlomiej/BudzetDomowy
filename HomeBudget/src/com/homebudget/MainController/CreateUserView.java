@@ -9,7 +9,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class CreateUserView {
 	public static void setSettingsCreateUserWindow() {
@@ -64,16 +63,16 @@ public class CreateUserView {
 
 	public static void createUser(String userName, String userPassword, Label showLabel) {
 		if (DatabaseSubscribtion.checkUserName(userName) == true) {
-			DatabaseSubscribtion.showWarrning(showLabel, 1.8, "User already exist", "red");
+			DatabaseSubscribtion.showWarning(showLabel, 1.8, "User already exist", "red");
 		} else if (DatabaseSubscribtion.checkCredintialsLength(userName) == false) {
-			DatabaseSubscribtion.showWarrning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
+			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
 		} else if (DatabaseSubscribtion.checkCredintialsLength(userPassword) == false) {
-			DatabaseSubscribtion.showWarrning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
+			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
 		} else if(ConfigureView.rewriteUserPasswordField.getText().equals(userPassword) == false){
-			DatabaseSubscribtion.showWarrning(showLabel, 1.8, "Both passwords must be the same", "red");
+			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Both passwords must be the same", "red");
 		} else{
 			DatabaseSubscribtion.insertNewUser(userName, userPassword);		
-			DatabaseSubscribtion.showWarrning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )", "green");
+			DatabaseSubscribtion.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )", "green");
 		}			
 	}
 }
