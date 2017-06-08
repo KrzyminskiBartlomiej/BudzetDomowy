@@ -5,6 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Public class used to configure connection with MySQl database.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ *
+ */
+
 public class DatabaseConnector {
 	private static String databaseDriver = "com.mysql.jdbc.Driver";
 	private static String databaseURL = "jdbc:mysql://localhost:3306/basiccosts?autoReconnect=true&useSSL=false";
@@ -15,6 +23,16 @@ public class DatabaseConnector {
 	private static Connection connection;
 	private static Properties properties;
 
+	/**
+	 * The Properties class represents a persistent set of properties. The
+	 * Properties can be saved to a stream or loaded from a stream. Each key and
+	 * its corresponding value in the property list is a string.
+	 * 
+	 * @return configured properties object which is now ready to set up the
+	 *         connection
+	 * 
+	 */
+
 	private static Properties getProperties() {
 		if (properties == null) {
 			properties = new Properties();
@@ -24,6 +42,18 @@ public class DatabaseConnector {
 		}
 		return properties;
 	}
+
+	/**
+	 * A connection (session) with a specific database. SQL statements are
+	 * executed and results are returned within the context of a connection.
+	 * 
+	 * A Connection object's database is able to provide information describing
+	 * its tables, its supported SQL grammar, its stored procedures, the
+	 * capabilities of this connection, and so on.
+	 * 
+	 * @return prepared session with database
+	 * 
+	 */
 
 	public static Connection connect() {
 		if (connection == null) {
@@ -36,6 +66,11 @@ public class DatabaseConnector {
 		}
 		return connection;
 	}
+
+	/**
+	 * Basically closes specific session
+	 * 
+	 */
 
 	public void disconnect() {
 		if (connection != null) {
@@ -55,8 +90,8 @@ public class DatabaseConnector {
 	public void setPassword(String pw) {
 		password = pw;
 	}
-	
-	public void setMaxPool(String mp){
+
+	public void setMaxPool(String mp) {
 		maxPool = mp;
 	}
 }
