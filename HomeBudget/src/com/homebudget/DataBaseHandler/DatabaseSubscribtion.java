@@ -8,7 +8,31 @@ import javafx.animation.PauseTransition;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+/**
+ * Public class consist necessary methods for server subscription purposes e.g.
+ * password checking, user checking, new user insertion. If there is a need to
+ * make another function that supports user subscription it is recommended to
+ * update this class.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ * 
+ */
+
 public class DatabaseSubscribtion {
+
+	/**
+	 * Creates query that is used to check if given user name has corresponding
+	 * password in database.
+	 * 
+	 * @param checkedUser
+	 *            contains name of user which already exists in database
+	 * @param passwordToBeChecked
+	 *            contains password to compare with created one in database
+	 * @return true if password is same like given, false if it isn't
+	 * 
+	 */
+
 	public static boolean checkPassword(String checkedUser, String passwordToBeChecked) {
 		Boolean checkResult = new Boolean(false);
 		String sqlCheckPasswordQuery = "SELECT userPassword FROM usersBank WHERE userName='" + checkedUser + "';";
@@ -28,6 +52,15 @@ public class DatabaseSubscribtion {
 		}
 		return checkResult;
 	}
+
+	/**
+	 * Creates query to check if given user name already exist in database.
+	 * 
+	 * @param userToBeChecked
+	 *            contains a name to check if already exist
+	 * @return true if user already exists, false if it's not
+	 * 
+	 */
 
 	public static boolean checkUserName(String userToBeChecked) {
 		Boolean checkResult = new Boolean(false);
@@ -51,11 +84,23 @@ public class DatabaseSubscribtion {
 		return checkResult;
 	}
 
+	/**
+	 * Creates a query that inserts new user into database. Used only after
+	 * validation.
+	 * 
+	 * @param userName
+	 *            user name to be created
+	 * @param userPassword
+	 *            password corresponding to user name
+	 * 
+	 */
+
 	public static void insertNewUser(String userName, String userPassword) {
 		DatabaseConnector createUserConnect = new DatabaseConnector();
-		String createUserQuery = "INSERT INTO usersbank (userName, userPassword) VALUES ('" + userName + "', '" + userPassword + "');";
+		String createUserQuery = "INSERT INTO usersbank (userName, userPassword) VALUES ('" + userName + "', '"
+				+ userPassword + "');";
 		PreparedStatement statement;
-		
+
 		try {
 			statement = DatabaseConnector.connect().prepareStatement(createUserQuery);
 			statement.executeUpdate();
@@ -64,12 +109,36 @@ public class DatabaseSubscribtion {
 			e.printStackTrace();
 		} finally {
 			createUserConnect.disconnect();
-		}	
+		}
 	}
+
+	/**
+	 * Checks if given String value is longer than four characters.
+	 * 
+	 * @param stringToBeChecked
+	 *            string value to be checked
+	 * @return true if string is longer, false if it isn't
+	 * 
+	 */
 
 	public static boolean checkCredintialsLength(String stringToBeChecked) {
 		return stringToBeChecked.length() > 4 ? true : false;
 	}
+
+	/**
+	 * Used to show information about current state of work with application.
+	 * 
+	 * @param showLabel
+	 *            Label that is affected with warning
+	 * @param showTime
+	 *            time in seconds used to set time of Label visibility
+	 * @param specificStatement
+	 *            information to show
+	 * @param e.g
+	 *            warningColor red if something wrong, green if everything is
+	 *            good
+	 * 
+	 */
 
 	public static void showWarning(Label showLabel, Double showTime, String specificStatement, String warningColor) {
 		PauseTransition visiblePause = new PauseTransition(Duration.seconds(showTime));
