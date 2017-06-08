@@ -19,7 +19,7 @@ import javafx.util.Duration;
  * 
  */
 
-public class DatabaseSubscribtion {
+public class DatabaseSubscription {
 
 	/**
 	 * Creates query that is used to check if given user name has corresponding

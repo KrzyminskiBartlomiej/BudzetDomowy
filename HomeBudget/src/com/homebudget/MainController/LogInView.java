@@ -1,6 +1,6 @@
 package com.homebudget.MainController;
 
-import com.homebudget.DataBaseHandler.DatabaseSubscribtion;
+import com.homebudget.DataBaseHandler.DatabaseSubscription;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -101,11 +101,11 @@ public class LogInView {
 	 */
 
 	public static void checkCredentials(String userName, String password) {
-		if (DatabaseSubscribtion.checkPassword(userName, password) == true
-				&& DatabaseSubscribtion.checkUserName(userName) == true) {
+		if (DatabaseSubscription.checkPassword(userName, password) == true
+				&& DatabaseSubscription.checkUserName(userName) == true) {
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
 		} else
-			DatabaseSubscribtion.showWarning(ConfigureView.logInFailedInformation, 1.8,
+			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 1.8,
 					"Incorrect user name or password", "red");
 	}
 

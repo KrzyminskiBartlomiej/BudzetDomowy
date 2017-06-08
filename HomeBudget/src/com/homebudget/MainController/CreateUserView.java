@@ -1,6 +1,6 @@
 package com.homebudget.MainController;
 
-import com.homebudget.DataBaseHandler.DatabaseSubscribtion;
+import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -99,17 +99,17 @@ public class CreateUserView {
 	 */
 
 	public static void createUser(String userName, String userPassword, Label showLabel) {
-		if (DatabaseSubscribtion.checkUserName(userName) == true) {
-			DatabaseSubscribtion.showWarning(showLabel, 1.8, "User already exist", "red");
-		} else if (DatabaseSubscribtion.checkCredintialsLength(userName) == false) {
-			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
-		} else if (DatabaseSubscribtion.checkCredintialsLength(userPassword) == false) {
-			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
+		if (DatabaseSubscription.checkUserName(userName) == true) {
+			DatabaseSubscription.showWarning(showLabel, 1.8, "User already exist", "red");
+		} else if (DatabaseSubscription.checkCredintialsLength(userName) == false) {
+			DatabaseSubscription.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
+		} else if (DatabaseSubscription.checkCredintialsLength(userPassword) == false) {
+			DatabaseSubscription.showWarning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
 		} else if (ConfigureView.rewriteUserPasswordField.getText().equals(userPassword) == false) {
-			DatabaseSubscribtion.showWarning(showLabel, 1.8, "Both passwords must be the same", "red");
+			DatabaseSubscription.showWarning(showLabel, 1.8, "Both passwords must be the same", "red");
 		} else {
-			DatabaseSubscribtion.insertNewUser(userName, userPassword);
-			DatabaseSubscribtion.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )",
+			DatabaseSubscription.insertNewUser(userName, userPassword);
+			DatabaseSubscription.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )",
 					"green");
 		}
 	}
