@@ -1,6 +1,6 @@
 # Home Budget
 
-<img height="100" src="resources/HBlogo.png">
+<img height="100" src="resources/HBLogo.png">
 
 ## Requirements
 - Windows
