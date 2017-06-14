@@ -34,7 +34,7 @@ public class LogInView {
 	 * 
 	 */
 
-	public static void setSettingsLogInWindow() {
+	public void setLogInWindow() {
 		ConfigureView.logInLabel = new Label("Welcome into Home Budget 2017");
 		ConfigureView.logInLabel.setStyle("-fx-font-size: 12pt;");
 
@@ -100,7 +100,7 @@ public class LogInView {
 	 * 
 	 */
 
-	public static void checkCredentials(String userName, String password) {
+	public void checkCredentials(String userName, String password) {
 		if (DatabaseSubscription.checkPassword(userName, password) == true
 				&& DatabaseSubscription.checkUserName(userName) == true) {
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
@@ -119,7 +119,7 @@ public class LogInView {
 	 *            is used to set-up first window view
 	 */
 
-	public static void invokeLogInWindow(Stage primaryStage) {
+	public void invokeLogInWindow(Stage primaryStage) {
 		ConfigureView.window = primaryStage;
 		ConfigureView.window.setScene(ConfigureView.logInScene);
 		ConfigureView.window.setTitle("Home Budget 2017");

@@ -14,7 +14,6 @@ import javafx.stage.Stage;
  */
 
 public class MainView extends Application {
-
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -26,10 +25,14 @@ public class MainView extends Application {
 	 */
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		CreateUserView.setSettingsCreateUserWindow();
-		LogInView.setSettingsLogInWindow();
-		MainApplicationView.setSettingsMainApplicationView();
-		LogInView.invokeLogInWindow(primaryStage);
+	public void start(Stage primaryStage) throws Exception {	
+		LogInView logInView = new LogInView();
+		CreateUserView createUserView = new CreateUserView();
+		MainApplicationView mainView = new MainApplicationView();
+
+		createUserView.setCreateUserWindow();
+		logInView.setLogInWindow();
+		mainView.setMainApplicationView();
+		logInView.invokeLogInWindow(primaryStage);
 	}
 }

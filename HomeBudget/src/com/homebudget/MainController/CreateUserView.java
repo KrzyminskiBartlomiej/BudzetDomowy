@@ -31,7 +31,7 @@ public class CreateUserView {
 	 * 
 	 */
 
-	public static void setSettingsCreateUserWindow() {
+	public void setCreateUserWindow() {
 		ConfigureView.createUserLabel = new Label("Create new user");
 		ConfigureView.createUserLabel.setStyle("-fx-font-size: 12pt;");
 
@@ -98,7 +98,7 @@ public class CreateUserView {
 	 *            label which show specific warning
 	 */
 
-	public static void createUser(String userName, String userPassword, Label showLabel) {
+	public void createUser(String userName, String userPassword, Label showLabel) {
 		if (DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "User already exist", "red");
 		} else if (DatabaseSubscription.checkCredintialsLength(userName) == false) {

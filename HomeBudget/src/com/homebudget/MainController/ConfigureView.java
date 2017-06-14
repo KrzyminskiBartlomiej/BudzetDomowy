@@ -5,6 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -48,5 +51,9 @@ public class ConfigureView {
 
 	// Main Application window fields
 	public static Scene applicationScene;
-	public static VBox layout3;
+	public static BorderPane mainBorderPane;
+	
+	public static Button addNew, showExpense, showJuxtaposition;
+	public static Image logoImage;
+	public static ImageView picture;
 }
