@@ -1,6 +1,7 @@
 package com.homebudget.MainController;
 
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
+import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -11,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -36,21 +38,28 @@ public class LogInView {
 
 	public void setLogInWindow() {
 		ConfigureView.logInLabel = new Label("Welcome into Home Budget 2017");
-		ConfigureView.logInLabel.setStyle("-fx-font-size: 12pt;");
+		ConfigureView.logInLabel.setFont(new Font(TextEdit.fontType, TextEdit.titleFontSize));
 
 		ConfigureView.createUserButton = new Button("Sign Up");
 		ConfigureView.createUserButton.centerShapeProperty();
+		ConfigureView.createUserButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
+		ConfigureView.createUserButton.setStyle("-fx-background-color: #ECF99C");
 		ConfigureView.createUserButton.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.signUpScene));
 
 		ConfigureView.userNameField = new TextField();
+		ConfigureView.userNameField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.logInButton = new Button("Sign in");
 		ConfigureView.logInButton.centerShapeProperty();
+		ConfigureView.logInButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
+		ConfigureView.logInButton.setStyle("-fx-background-color: #83D18D");
 		ConfigureView.logInButton.setOnAction(e -> checkCredentials(ConfigureView.userNameField.getText(),
 				ConfigureView.userPasswordField.getText()));
 
 		ConfigureView.exitButton = new Button("Exit");
 		ConfigureView.exitButton.centerShapeProperty();
+		ConfigureView.exitButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
+		ConfigureView.exitButton.setStyle("-fx-background-color: #FFA7A0");
 		ConfigureView.exitButton.setOnAction(e -> Platform.exit());
 
 		ConfigureView.logInFailedInformation = new Label();
@@ -67,14 +76,18 @@ public class LogInView {
 		ConfigureView.layout1 = new VBox(20);
 		ConfigureView.layout1.getChildren().addAll(ConfigureView.logInLabel, ConfigureView.logIngrid,
 				ConfigureView.buttonsGrid, ConfigureView.logInFailedInformation);
+		ConfigureView.layout1.setStyle("-fx-background-color: #FFFFFF");
 
 		ConfigureView.layout1.setAlignment(Pos.CENTER);
-		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 300, 300);
+		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 400, 220);
 
 		ConfigureView.userName = new Label("User name:");
+		ConfigureView.userName.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));
 
 		ConfigureView.userPassword = new Label("User password:");
+		ConfigureView.userPassword.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));
 		ConfigureView.userPasswordField = new PasswordField();
+		ConfigureView.userPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.logIngrid.add(ConfigureView.userName, 0, 0);
 		ConfigureView.logIngrid.add(ConfigureView.userNameField, 1, 0);

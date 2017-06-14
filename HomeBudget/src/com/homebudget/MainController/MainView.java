@@ -1,5 +1,7 @@
 package com.homebudget.MainController;
 
+import com.homebudget.Utils.TextEdit;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -29,7 +31,9 @@ public class MainView extends Application {
 		LogInView logInView = new LogInView();
 		CreateUserView createUserView = new CreateUserView();
 		MainApplicationView mainView = new MainApplicationView();
-
+		TextEdit textStyle = new TextEdit();
+		
+		textStyle.setTextValue("Comic Sans MS", 14.0, 12.0, 16.0);
 		createUserView.setCreateUserWindow();
 		logInView.setLogInWindow();
 		mainView.setMainApplicationView();
