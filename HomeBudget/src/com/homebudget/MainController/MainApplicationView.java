@@ -4,17 +4,22 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class MainApplicationView {
 	public void setMainApplicationView() {
 		ConfigureView.mainBorderPane = new BorderPane();
 		ConfigureView.mainBorderPane.setTop(addTopMenu());
 		ConfigureView.mainBorderPane.setLeft(addLeftBottomMenu());
+		ConfigureView.mainBorderPane.setCenter(createTableView());
 
 		ConfigureView.applicationScene = new Scene(ConfigureView.mainBorderPane, 600, 500);
 	}
@@ -38,7 +43,7 @@ public class MainApplicationView {
 		Button exit = new Button("Exit");
 		exit.setPrefSize(100, 20);
 		exit.setOnAction(e -> Platform.exit());
-
+		
 		topMenu.getChildren().add(hbLogoView);
 		topMenu.getChildren().add(logOut);
 		topMenu.getChildren().add(exit);
@@ -54,18 +59,37 @@ public class MainApplicationView {
 		leftBottomMenu.setStyle("-fx-background-color: #D4805D");
 		
 		ConfigureView.addNew = new Button("Add new...");
-		ConfigureView.addNew.setPrefSize(100, 20);
+		ConfigureView.addNew.setPrefSize(130, 20);
 		
 		ConfigureView.showExpense = new Button("Show...");
-		ConfigureView.showExpense.setPrefSize(100, 20);
+		ConfigureView.showExpense.setPrefSize(130, 20);
 		
 		ConfigureView.showJuxtaposition = new Button("Make Juxtaposition");
-		ConfigureView.showJuxtaposition.setPrefSize(100, 20);
+		ConfigureView.showJuxtaposition.setPrefSize(130, 20);
 		
 		leftBottomMenu.getChildren().add(ConfigureView.addNew);	
 		leftBottomMenu.getChildren().add(ConfigureView.showExpense);	
 		leftBottomMenu.getChildren().add(ConfigureView.showJuxtaposition);	
 		
 		return leftBottomMenu;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public TableView createTableView(){
+		TableView tableView = new TableView();
+		final Label tableLabel = new Label("Expensives");
+		tableLabel.setFont(new Font("Arial", 20));		
+		tableView.setEditable(true);
+		
+		TableColumn id = new TableColumn("Id");
+		TableColumn typeCost = new TableColumn("Type");
+		TableColumn nameCost = new TableColumn("Name");
+		TableColumn dateCost = new TableColumn("Date");
+		TableColumn valueCost = new TableColumn("Value");
+		
+		tableView.getColumns().addAll(id,typeCost, nameCost, dateCost, valueCost);
+		tableView.setVisible(true);
+		
+		return tableView;
 	}
 }
