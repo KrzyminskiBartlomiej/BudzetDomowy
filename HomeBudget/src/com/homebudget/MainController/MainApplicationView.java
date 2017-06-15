@@ -1,18 +1,17 @@
 package com.homebudget.MainController;
 
+import com.homebudget.Utils.TableViewHandler;
+
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class MainApplicationView {
 	public void setMainApplicationView() {
@@ -74,22 +73,25 @@ public class MainApplicationView {
 		return leftBottomMenu;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public TableView createTableView(){
-		TableView tableView = new TableView();
-		final Label tableLabel = new Label("Expensives");
-		tableLabel.setFont(new Font("Arial", 20));		
-		tableView.setEditable(true);
+	@SuppressWarnings({ "rawtypes" })
+	public TableView createTableView(){		
+		TableViewHandler newTable = new TableViewHandler();
+		newTable.getAllData();
 		
-		TableColumn id = new TableColumn("Id");
-		TableColumn typeCost = new TableColumn("Type");
-		TableColumn nameCost = new TableColumn("Name");
-		TableColumn dateCost = new TableColumn("Date");
-		TableColumn valueCost = new TableColumn("Value");
+//		TableView tableView = new TableView();
+//		final Label tableLabel = new Label("Expensives");
+//		tableLabel.setFont(new Font("Arial", 20));		
+//		tableView.setEditable(true);
 		
-		tableView.getColumns().addAll(id,typeCost, nameCost, dateCost, valueCost);
-		tableView.setVisible(true);
+//		TableColumn id = new TableColumn("Id");
+//		TableColumn typeCost = new TableColumn("Type");
+//		TableColumn nameCost = new TableColumn("Name");
+//		TableColumn dateCost = new TableColumn("Date");
+//		TableColumn valueCost = new TableColumn("Value");
 		
-		return tableView;
+//		tableView.getColumns().addAll(id,typeCost, nameCost, dateCost, valueCost);
+//		tableView.setVisible(true);
+		
+		return newTable.getTable();
 	}
 }
