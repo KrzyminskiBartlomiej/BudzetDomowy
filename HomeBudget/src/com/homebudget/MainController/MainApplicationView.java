@@ -78,20 +78,6 @@ public class MainApplicationView {
 		TableViewHandler newTable = new TableViewHandler();
 		newTable.getAllData();
 		
-//		TableView tableView = new TableView();
-//		final Label tableLabel = new Label("Expensives");
-//		tableLabel.setFont(new Font("Arial", 20));		
-//		tableView.setEditable(true);
-		
-//		TableColumn id = new TableColumn("Id");
-//		TableColumn typeCost = new TableColumn("Type");
-//		TableColumn nameCost = new TableColumn("Name");
-//		TableColumn dateCost = new TableColumn("Date");
-//		TableColumn valueCost = new TableColumn("Value");
-		
-//		tableView.getColumns().addAll(id,typeCost, nameCost, dateCost, valueCost);
-//		tableView.setVisible(true);
-		
 		return newTable.getTable();
 	}
 }
