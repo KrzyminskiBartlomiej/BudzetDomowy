@@ -1,5 +1,6 @@
 package com.homebudget.MainController;
 
+import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TextEdit;
 
@@ -116,6 +117,9 @@ public class LogInView {
 	public void checkCredentials(String userName, String password) {
 		if (DatabaseSubscription.checkPassword(userName, password) == true
 				&& DatabaseSubscription.checkUserName(userName) == true) {
+			DatabaseConnector.setUsername(userName);
+			MainApplicationView mainView = new MainApplicationView();
+			mainView.setMainApplicationView();
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
 		} else
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 1.8,

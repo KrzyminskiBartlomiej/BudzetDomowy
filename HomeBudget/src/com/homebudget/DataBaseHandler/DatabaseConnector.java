@@ -83,8 +83,12 @@ public class DatabaseConnector {
 		}
 	}
 
-	public void setUsername(String un) {
+	public static void setUsername(String un) {
 		username = un;
+	}
+	
+	public static String getUserName(){
+		return username;
 	}
 
 	public void setPassword(String pw) {

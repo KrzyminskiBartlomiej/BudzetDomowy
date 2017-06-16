@@ -1,5 +1,6 @@
 package com.homebudget.MainController;
 
+import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -110,7 +111,10 @@ public class CreateUserView {
 		} else {
 			DatabaseSubscription.insertNewUser(userName, userPassword);
 			DatabaseSubscription.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )",
-					"green");
+					"green");			
+			DatabaseSubscription.executeNewUpdateQuery("CREATE VIEW " + userName
+			+ "View AS SELECT idCost, typeCost, nameCost, valueCost, dateCost FROM costs WHERE userName='"
+			+ userName + "'");
 		}
 	}
 }

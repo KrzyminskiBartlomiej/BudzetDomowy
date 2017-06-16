@@ -23,7 +23,7 @@ public class TableViewHandler extends TableView{
 	@SuppressWarnings({ "unchecked" })
 	public void getAllData() {
 		tableView = new TableView();
-		String getAllDataQuery = "SELECT * FROM costs";
+		String getAllDataQuery = "SELECT * FROM " + DatabaseConnector.getUserName() + "View";
 		PreparedStatement statement;
 
 		try {
@@ -51,6 +51,7 @@ public class TableViewHandler extends TableView{
 				data.add(row);
 			}
 			tableView.setItems(data);
+			tableView.refresh();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

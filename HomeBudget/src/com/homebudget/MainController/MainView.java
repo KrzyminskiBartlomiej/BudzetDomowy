@@ -29,14 +29,12 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {	
 		LogInView logInView = new LogInView();
-		CreateUserView createUserView = new CreateUserView();
-		MainApplicationView mainView = new MainApplicationView();
+		CreateUserView createUserView = new CreateUserView();		
 		TextEdit textStyle = new TextEdit();
 		
 		textStyle.setTextValue("Comic Sans MS", 14.0, 12.0, 16.0);
 		createUserView.setCreateUserWindow();
-		logInView.setLogInWindow();
-		mainView.setMainApplicationView();
+		logInView.setLogInWindow();		
 		logInView.invokeLogInWindow(primaryStage);
 	}
 }

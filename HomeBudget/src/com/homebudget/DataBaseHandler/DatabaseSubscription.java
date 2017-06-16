@@ -20,7 +20,7 @@ import javafx.util.Duration;
  */
 
 public class DatabaseSubscription {
-
+	public static String userDBTableView;
 	/**
 	 * Creates query that is used to check if given user name has corresponding
 	 * password in database.
@@ -147,5 +147,21 @@ public class DatabaseSubscription {
 		showLabel.setVisible(true);
 		visiblePause.setOnFinished(e -> showLabel.setVisible(false));
 		visiblePause.play();
+	}
+	
+	public static void executeNewUpdateQuery(String newQuery){
+		DatabaseConnector createUserConnect = new DatabaseConnector();
+		PreparedStatement statement;
+		
+		try {
+			statement = DatabaseConnector.connect().prepareStatement(newQuery);
+			statement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			createUserConnect.disconnect();
+		}
 	}
 }
