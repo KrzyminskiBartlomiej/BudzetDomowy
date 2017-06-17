@@ -12,7 +12,23 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Used to create layout for main application. Created via BorderPane because of
+ * practical approach.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ * 
+ */
+
 public class MainApplicationView {
+
+	/**
+	 * Used only to set regions in BorderPane, and assignment new scene to
+	 * Configure class.
+	 * 
+	 */
+
 	public void setMainApplicationView() {
 		ConfigureView.mainBorderPane = new BorderPane();
 		ConfigureView.mainBorderPane.setTop(addTopMenu());
@@ -20,6 +36,13 @@ public class MainApplicationView {
 
 		ConfigureView.applicationScene = new Scene(ConfigureView.mainBorderPane, 600, 500);
 	}
+
+	/**
+	 * Creates content for top menu.
+	 * 
+	 * @return created and configured HBox
+	 * 
+	 */
 
 	public HBox addTopMenu() {
 		HBox topMenu = new HBox();
@@ -40,39 +63,52 @@ public class MainApplicationView {
 		Button exit = new Button("Exit");
 		exit.setPrefSize(100, 20);
 		exit.setOnAction(e -> Platform.exit());
-		
+
 		topMenu.getChildren().add(hbLogoView);
 		topMenu.getChildren().add(logOut);
 		topMenu.getChildren().add(exit);
 
 		return topMenu;
 	}
-	
-	public VBox addLeftBottomMenu(){
+
+	/**
+	 * Creates content for left side of application.
+	 * 
+	 * @return created and configured HBox
+	 * 
+	 */
+
+	public VBox addLeftBottomMenu() {
 		VBox leftBottomMenu = new VBox();
 		leftBottomMenu.setPadding(new Insets(10));
 		leftBottomMenu.setSpacing(8);
 		leftBottomMenu.setPrefWidth(174);
 		leftBottomMenu.setStyle("-fx-background-color: #D4805D");
-		
-		ConfigureView.addNew = new Button("Add new...");
-		ConfigureView.addNew.setPrefSize(130, 20);
-		
-		ConfigureView.showExpense = new Button("Show...");
-		ConfigureView.showExpense.setPrefSize(130, 20);
-		ConfigureView.showExpense.setOnAction(e -> createTableView());
-		
-		ConfigureView.showJuxtaposition = new Button("Make Juxtaposition");
-		ConfigureView.showJuxtaposition.setPrefSize(130, 20);
-		
-		leftBottomMenu.getChildren().add(ConfigureView.addNew);	
-		leftBottomMenu.getChildren().add(ConfigureView.showExpense);	
-		leftBottomMenu.getChildren().add(ConfigureView.showJuxtaposition);	
-		
+
+		Button addNew = new Button("Add new...");
+		addNew.setPrefSize(130, 20);
+
+		Button showExpense = new Button("Show...");
+		showExpense.setPrefSize(130, 20);
+		showExpense.setOnAction(e -> createTableView());
+
+		Button showJuxtaposition = new Button("Make Juxtaposition");
+		showJuxtaposition.setPrefSize(130, 20);
+
+		leftBottomMenu.getChildren().add(addNew);
+		leftBottomMenu.getChildren().add(showExpense);
+		leftBottomMenu.getChildren().add(showJuxtaposition);
+
 		return leftBottomMenu;
 	}
-	
-	public void createTableView(){		
+
+	/**
+	 * Used only when user want to (e.g by click on button), it avoids
+	 * unnecessary application resources usage.
+	 * 
+	 */
+
+	public void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
 		newTable.getAllData();
 		ConfigureView.mainBorderPane.setCenter(newTable.getTable());

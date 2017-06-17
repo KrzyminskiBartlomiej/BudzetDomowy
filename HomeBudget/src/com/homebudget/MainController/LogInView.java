@@ -105,7 +105,8 @@ public class LogInView {
 	 * This method is responsible for validation user credentials. Secure
 	 * mechanism that allow to login into main application checks if user
 	 * identified by given password exists in database. Wrong credentials case
-	 * are indicated by warning.
+	 * are indicated by warning. Positive validation creates also
+	 * mainApplicationView.
 	 * 
 	 * @param userName
 	 *            user to be checked in database

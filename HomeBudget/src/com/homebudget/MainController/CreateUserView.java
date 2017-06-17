@@ -1,6 +1,5 @@
 package com.homebudget.MainController;
 
-import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -89,7 +88,8 @@ public class CreateUserView {
 	 * handled. First step is to check if given user already exists, and then if
 	 * both given passwords are identical. User name and password must be also
 	 * longer that four characters. Any wrong credential will be occur proper
-	 * warning visible by user.
+	 * warning visible by user. Positive validation creates also new database view
+	 * for current user.
 	 * 
 	 * @param userName
 	 *            user name to be created

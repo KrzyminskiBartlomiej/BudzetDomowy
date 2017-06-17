@@ -15,10 +15,29 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
+/**
+ * Used to handle operations connected with table in application, which means
+ * CREATING, DELETING, UPDATING etc.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ *
+ */
+
 @SuppressWarnings("rawtypes")
-public class TableViewHandler extends TableView{
+public class TableViewHandler extends TableView {
 	private TableView tableView;
 	private ObservableList<ObservableList> data;
+
+	/**
+	 * Used to get all data from user view. For now this method downloads all
+	 * data from user view but in near future it has to take data from specific
+	 * views which makes this method very useful. It also have two tasks, first
+	 * one to create specific tableView and store it into private field, second
+	 * one is to get all data into private field ObservableList. This behavior 
+	 * allows to use generated data in another node e.g chart.
+	 * 
+	 */
 
 	@SuppressWarnings({ "unchecked" })
 	public void getAllData() {
@@ -52,13 +71,14 @@ public class TableViewHandler extends TableView{
 			}
 			tableView.setItems(data);
 			tableView.refresh();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public TableView getTable(){
+
+	public TableView getTable() {
 		return tableView;
 	}
 }
