@@ -34,7 +34,7 @@ public class TableViewHandler extends TableView {
 	 * data from user view but in near future it has to take data from specific
 	 * views which makes this method very useful. It also have two tasks, first
 	 * one to create specific tableView and store it into private field, second
-	 * one is to get all data into private field ObservableList. This behavior 
+	 * one is to get all data into private field ObservableList. This behavior
 	 * allows to use generated data in another node e.g chart.
 	 * 
 	 */
@@ -44,6 +44,7 @@ public class TableViewHandler extends TableView {
 		tableView = new TableView();
 		String getAllDataQuery = "SELECT * FROM " + DatabaseConnector.getUserName() + "View";
 		PreparedStatement statement;
+		Integer counter = 1;
 
 		try {
 			statement = DatabaseConnector.connect().prepareStatement(getAllDataQuery);
@@ -67,6 +68,8 @@ public class TableViewHandler extends TableView {
 				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 					row.add(rs.getString(i));
 				}
+				row.set(0, counter.toString());
+				counter++;
 				data.add(row);
 			}
 			tableView.setItems(data);
