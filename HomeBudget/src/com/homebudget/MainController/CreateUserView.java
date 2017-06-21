@@ -88,8 +88,8 @@ public class CreateUserView {
 	 * handled. First step is to check if given user already exists, and then if
 	 * both given passwords are identical. User name and password must be also
 	 * longer that four characters. Any wrong credential will be occur proper
-	 * warning visible by user. Positive validation creates also new database view
-	 * for current user.
+	 * warning visible by user. Positive validation creates also new database
+	 * view for current user.
 	 * 
 	 * @param userName
 	 *            user name to be created
@@ -111,10 +111,12 @@ public class CreateUserView {
 		} else {
 			DatabaseSubscription.insertNewUser(userName, userPassword);
 			DatabaseSubscription.showWarning(showLabel, 3.5, "Congratulations ! User Created, please Sign In : )",
-					"green");			
+					"green");
+			DatabaseSubscription.executeNewUpdateQuery(
+					"GRANT ALL PRIVILEGES ON basiccosts.* TO '" + userName + "' IDENTIFIED BY '" + userPassword + "'");
 			DatabaseSubscription.executeNewUpdateQuery("CREATE VIEW " + userName
-			+ "View AS SELECT idCost, typeCost, nameCost, valueCost, dateCost FROM costs WHERE userName='"
-			+ userName + "'");
+					+ "View AS SELECT idCost, typeCost, nameCost, valueCost, dateCost FROM costs WHERE userName='"
+					+ userName + "'");
 		}
 	}
 }

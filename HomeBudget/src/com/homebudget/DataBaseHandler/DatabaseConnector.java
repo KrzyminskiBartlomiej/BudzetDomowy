@@ -82,6 +82,11 @@ public class DatabaseConnector {
 			}
 		}
 	}
+	
+	public static void changeToAdmin(){
+		username = "root";
+		password = "Spiderman143";
+	}
 
 	public static void setUsername(String un) {
 		username = un;

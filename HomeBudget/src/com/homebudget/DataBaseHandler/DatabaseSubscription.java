@@ -174,4 +174,11 @@ public class DatabaseSubscription {
 			createUserConnect.disconnect();
 		}
 	}
+	
+	public static void pernamentDeleteUser(String userName){
+		DatabaseConnector.changeToAdmin();
+		executeNewUpdateQuery("DELETE * FROM " +  userName + "View");
+		executeNewUpdateQuery("DROP VIEW " + userName + "View");
+		executeNewUpdateQuery("DELETE * FROM  usersBank WHERE userName = '" + userName + "'");
+	}
 }

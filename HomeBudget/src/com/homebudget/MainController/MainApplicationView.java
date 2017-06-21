@@ -1,11 +1,18 @@
 package com.homebudget.MainController;
 
+import java.util.Optional;
+
+import com.homebudget.DataBaseHandler.DatabaseConnector;
+import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -56,6 +63,10 @@ public class MainApplicationView {
 		hbLogoView.setFitHeight(150);
 		hbLogoView.setFitWidth(150);
 
+		Button deleteUser = new Button("Delete User");
+		deleteUser.setPrefSize(100, 20);
+		deleteUser.setOnAction(e -> deleteUser(DatabaseConnector.getUserName()));
+
 		Button logOut = new Button("Log Out");
 		logOut.setPrefSize(100, 20);
 		logOut.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.logInScene));
@@ -65,6 +76,7 @@ public class MainApplicationView {
 		exit.setOnAction(e -> Platform.exit());
 
 		topMenu.getChildren().add(hbLogoView);
+		topMenu.getChildren().add(deleteUser);
 		topMenu.getChildren().add(logOut);
 		topMenu.getChildren().add(exit);
 
@@ -112,5 +124,31 @@ public class MainApplicationView {
 		TableViewHandler newTable = new TableViewHandler();
 		newTable.getAllData();
 		ConfigureView.mainBorderPane.setCenter(newTable.getTable());
+	}
+
+	/**
+	 * Before it deletes user, it throws an alert to ensure if user is aware of
+	 * what happens.
+	 * 
+	 * @param userName
+	 *            user to be deleted
+	 */
+
+	public void deleteUser(String userName) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation");
+		alert.setHeaderText("By choosing ok, your account will be deleted");
+		alert.setContentText("Are you ok with this?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			System.out.println("user deleted");
+
+			// Place from deleteUser function from databaseSubscription
+
+			ConfigureView.window.setScene(ConfigureView.logInScene);
+			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 2.4,
+					"Your account has been deleted, see You again!", "green");
+		}
 	}
 }
