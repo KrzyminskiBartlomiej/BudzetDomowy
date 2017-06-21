@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
+import com.homebudget.Utils.ExpensiveAdditionHandler;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
@@ -99,6 +100,7 @@ public class MainApplicationView {
 
 		Button addNew = new Button("Add new...");
 		addNew.setPrefSize(130, 20);
+		addNew.setOnAction(e -> addNewHandler());
 
 		Button showExpense = new Button("Show...");
 		showExpense.setPrefSize(130, 20);
@@ -124,6 +126,25 @@ public class MainApplicationView {
 		TableViewHandler newTable = new TableViewHandler();
 		newTable.getAllData();
 		ConfigureView.mainBorderPane.setCenter(newTable.getTable());
+	}
+	
+	public void addNewHandler(){
+		VBox decisionBox = new VBox();
+		ExpensiveAdditionHandler createExpensiveProcedure = new ExpensiveAdditionHandler();
+		
+		decisionBox.setPadding(new Insets(10));
+		decisionBox.setSpacing(8);
+		decisionBox.setPrefWidth(174);
+		decisionBox.setStyle("-fx-background-color: #D4805D");
+		
+		Button income = new Button("Income");
+		Button outcome = new Button("Outcome");
+		outcome.setOnAction(e -> createExpensiveProcedure.createExpensive());
+		
+		decisionBox.getChildren().add(income);
+		decisionBox.getChildren().add(outcome);
+		
+		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
 
 	/**
