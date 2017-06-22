@@ -14,11 +14,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Used to create layout for main application. Created via BorderPane because of
@@ -37,12 +39,15 @@ public class MainApplicationView {
 	 * 
 	 */
 
-	public void setMainApplicationView() {
+	public void setMainApplicationView(Stage primaryStage) {
 		ConfigureView.mainBorderPane = new BorderPane();
 		ConfigureView.mainBorderPane.setTop(addTopMenu());
 		ConfigureView.mainBorderPane.setLeft(addLeftBottomMenu());
 
 		ConfigureView.applicationScene = new Scene(ConfigureView.mainBorderPane, 600, 500);
+		primaryStage.setScene(ConfigureView.applicationScene);
+		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
 	}
 
 	/**
@@ -124,8 +129,19 @@ public class MainApplicationView {
 
 	public void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
+		ScrollPane scrolledTable = new ScrollPane();
+		VBox tableBox = new VBox();
+		
 		newTable.getAllData();
-		ConfigureView.mainBorderPane.setCenter(newTable.getTable());
+		newTable.setTableStyle();
+		scrolledTable.setContent(newTable.getTable());
+		scrolledTable.autosize();
+		scrolledTable.fitToHeightProperty();
+		scrolledTable.fitToWidthProperty();
+		tableBox.getChildren().add(scrolledTable);
+		tableBox.setPadding(new Insets(8,8,8,8));
+		
+		ConfigureView.mainBorderPane.setCenter(tableBox);
 	}
 	
 	public void addNewHandler(){

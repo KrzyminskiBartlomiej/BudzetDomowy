@@ -80,6 +80,12 @@ public class TableViewHandler extends TableView {
 			e.printStackTrace();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void setTableStyle(){
+		tableView.autosize();	
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	}
 
 	public TableView getTable() {
 		return tableView;

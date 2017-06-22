@@ -5,6 +5,7 @@ import com.homebudget.MainController.ConfigureView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -33,7 +34,8 @@ public class ExpensiveAdditionHandler {
 		TextField costValueField = new TextField();
 		
 		Button create = new Button("Create!");
-		//create.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		create.setMaxWidth(200);
+		create.setAlignment(Pos.BOTTOM_CENTER);
 		
 		decisionBox.getChildren().add(expensiveCategory);	
 		decisionBox.getChildren().add(costName);

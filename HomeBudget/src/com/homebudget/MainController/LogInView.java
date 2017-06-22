@@ -120,7 +120,7 @@ public class LogInView {
 				&& DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseConnector.setUsername(userName);
 			MainApplicationView mainView = new MainApplicationView();
-			mainView.setMainApplicationView();
+			mainView.setMainApplicationView(ConfigureView.window);
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
 		} else
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 1.8,
