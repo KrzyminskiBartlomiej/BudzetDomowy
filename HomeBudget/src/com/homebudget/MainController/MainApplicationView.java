@@ -105,7 +105,7 @@ public class MainApplicationView {
 
 		Button addNew = new Button("Add new...");
 		addNew.setPrefSize(130, 20);
-		addNew.setOnAction(e -> addNewHandler());
+		addNew.setOnAction(e -> setExpenseType());
 
 		Button showExpense = new Button("Show...");
 		showExpense.setPrefSize(130, 20);
@@ -131,7 +131,7 @@ public class MainApplicationView {
 		TableViewHandler newTable = new TableViewHandler();
 		ScrollPane scrolledTable = new ScrollPane();
 		VBox tableBox = new VBox();
-		
+
 		newTable.getAllData();
 		newTable.setTableStyle();
 		scrolledTable.setContent(newTable.getTable());
@@ -139,33 +139,40 @@ public class MainApplicationView {
 		scrolledTable.fitToHeightProperty();
 		scrolledTable.fitToWidthProperty();
 		tableBox.getChildren().add(scrolledTable);
-		tableBox.setPadding(new Insets(8,8,8,8));
-		
+		tableBox.setPadding(new Insets(8, 8, 8, 8));
+
 		ConfigureView.mainBorderPane.setCenter(tableBox);
 	}
-	
-	public void addNewHandler(){
+
+	/**
+	 * Method used in create expense procedure, it updates left BorderPane
+	 * region with decision buttons.
+	 * 
+	 */
+
+	public void setExpenseType() {
 		VBox decisionBox = new VBox();
 		ExpensiveAdditionHandler createExpensiveProcedure = new ExpensiveAdditionHandler();
-		
+
 		decisionBox.setPadding(new Insets(10));
 		decisionBox.setSpacing(8);
 		decisionBox.setPrefWidth(174);
 		decisionBox.setStyle("-fx-background-color: #D4805D");
-		
+
 		Button income = new Button("Income");
 		Button outcome = new Button("Outcome");
 		outcome.setOnAction(e -> createExpensiveProcedure.createExpensive());
-		
+
 		decisionBox.getChildren().add(income);
 		decisionBox.getChildren().add(outcome);
-		
+
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
 
 	/**
 	 * Before it deletes user, it throws an alert to ensure if user is aware of
-	 * what happens.
+	 * what happens. After positive user deletion it forwards user to logInView
+	 * and show proper information.
 	 * 
 	 * @param userName
 	 *            user to be deleted
@@ -179,10 +186,7 @@ public class MainApplicationView {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
-			System.out.println("user deleted");
-
-			// Place from deleteUser function from databaseSubscription
-
+			DatabaseSubscription.pernamentDeleteUser(userName);
 			ConfigureView.window.setScene(ConfigureView.logInScene);
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 2.4,
 					"Your account has been deleted, see You again!", "green");

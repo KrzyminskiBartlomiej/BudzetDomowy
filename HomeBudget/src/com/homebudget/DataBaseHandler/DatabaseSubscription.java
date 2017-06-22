@@ -156,7 +156,7 @@ public class DatabaseSubscription {
 	 * @param newQuery
 	 *            query executed by executeUpdate() method, so it have to be
 	 *            INSERT, UPDATE or DELETE statement.
-	 *            
+	 * 
 	 */
 
 	public static void executeNewUpdateQuery(String newQuery) {
@@ -174,11 +174,20 @@ public class DatabaseSubscription {
 			createUserConnect.disconnect();
 		}
 	}
-	
-	public static void pernamentDeleteUser(String userName){
+
+	/**
+	 * Method used to delete user from database. First it changes privileges to
+	 * root and then it deletes all expensive, user view and user.
+	 * 
+	 * @param userName
+	 *            user to be deleted
+	 * 
+	 */
+
+	public static void pernamentDeleteUser(String userName) {
 		DatabaseConnector.changeToAdmin();
-		executeNewUpdateQuery("DELETE * FROM " +  userName + "View");
-		executeNewUpdateQuery("DROP VIEW " + userName + "View");
-		executeNewUpdateQuery("DELETE * FROM  usersBank WHERE userName = '" + userName + "'");
+		executeNewUpdateQuery("DELETE FROM costs WHERE userName = '" + userName + "';");
+		executeNewUpdateQuery("DROP VIEW " + userName + "View;");
+		executeNewUpdateQuery("DELETE FROM usersBank WHERE userName = '" + userName + "';");
 	}
 }

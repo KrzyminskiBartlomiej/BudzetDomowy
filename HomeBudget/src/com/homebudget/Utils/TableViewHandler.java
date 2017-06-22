@@ -81,14 +81,24 @@ public class TableViewHandler extends TableView {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void tableRefresher(){
+
+	/**
+	 * Refreshes tableView and all content.
+	 * 
+	 */
+
+	public static void tableRefresher() {
 		MainApplicationView.createTableView();
 	}
-	
+
+	/**
+	 * Method used to handle tableView style.
+	 * 
+	 */
+
 	@SuppressWarnings("unchecked")
-	public void setTableStyle(){
-		tableView.autosize();	
+	public void setTableStyle() {
+		tableView.autosize();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 

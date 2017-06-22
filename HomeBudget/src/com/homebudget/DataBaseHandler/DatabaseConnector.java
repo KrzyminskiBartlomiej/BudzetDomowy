@@ -83,6 +83,11 @@ public class DatabaseConnector {
 		}
 	}
 	
+	/**
+	 * Setting up credentials to root.
+	 * 
+	 */
+	
 	public static void changeToAdmin(){
 		username = "root";
 		password = "Spiderman143";

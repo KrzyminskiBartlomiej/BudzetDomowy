@@ -18,9 +18,23 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class ExpensiveAdditionHandler {
+/**
+ * Class that is responsible for support expensive addition handling procedure.
+ * Each method which is taking part in adding expensive procedure should be
+ * placed here.
+ * 
+ * @author Bartlomiej Krzyminski
+ * @since v1.00
+ *
+ */
 
+public class ExpensiveAdditionHandler {
 	static VBox decisionBox;
+
+	/**
+	 * It updates region with expensive creation (left side box).
+	 * 
+	 */
 
 	public void createExpensive() {
 		decisionBox = new VBox();
@@ -56,6 +70,20 @@ public class ExpensiveAdditionHandler {
 
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
+
+	/**
+	 * Adds new expense into database. It also updates userView, and refreshes
+	 * tableView for instant cost view. At the end it refreshes left side of
+	 * BorderPane.
+	 * 
+	 * @param costType
+	 *            type of cost chosen from ListView.
+	 * @param costName
+	 *            name of cost written by user
+	 * @param costValue
+	 *            value of cost written by user
+	 * 
+	 */
 
 	public static void addDescribedExpenseToDatabase(String costType, String costName, String costValue) {
 		DateTimeFormatter currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
