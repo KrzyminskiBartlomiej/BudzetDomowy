@@ -127,7 +127,7 @@ public class MainApplicationView {
 	 * 
 	 */
 
-	public void createTableView() {
+	public static void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
 		ScrollPane scrolledTable = new ScrollPane();
 		VBox tableBox = new VBox();

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
+import com.homebudget.MainController.MainApplicationView;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -79,6 +80,10 @@ public class TableViewHandler extends TableView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void tableRefresher(){
+		MainApplicationView.createTableView();
 	}
 	
 	@SuppressWarnings("unchecked")
