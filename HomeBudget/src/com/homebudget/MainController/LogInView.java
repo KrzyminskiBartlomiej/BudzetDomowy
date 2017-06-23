@@ -119,6 +119,8 @@ public class LogInView {
 		if (DatabaseSubscription.checkPassword(userName, password) == true
 				&& DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseConnector.setUsername(userName);
+			ConfigureView.userNameField.clear();
+			ConfigureView.userPasswordField.clear();
 			MainApplicationView mainView = new MainApplicationView();
 			mainView.setMainApplicationView(ConfigureView.window);
 			ConfigureView.window.setScene(ConfigureView.applicationScene);

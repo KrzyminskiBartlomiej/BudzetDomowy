@@ -66,6 +66,7 @@ public class DatabaseSubscription {
 		DatabaseConnector mysqlConnect = new DatabaseConnector();
 		String sqlTestCommand = "SELECT userName FROM usersBank WHERE userName='" + userToBeChecked + "';";
 		PreparedStatement statement;
+		DatabaseGetData.userName.clear();
 
 		try {
 			statement = DatabaseConnector.connect().prepareStatement(sqlTestCommand);

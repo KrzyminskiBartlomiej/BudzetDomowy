@@ -117,6 +117,9 @@ public class CreateUserView {
 			DatabaseSubscription.executeNewUpdateQuery("CREATE VIEW " + userName
 					+ "View AS SELECT idCost, typeCost, nameCost, valueCost, dateCost FROM costs WHERE userName='"
 					+ userName + "'");
+			ConfigureView.setUserField.clear();
+			ConfigureView.createUserPasswordField.clear();
+			ConfigureView.rewriteUserPasswordField.clear();
 		}
 	}
 }
