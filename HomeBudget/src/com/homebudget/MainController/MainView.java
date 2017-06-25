@@ -4,6 +4,7 @@ import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * Application class from which JavaFX applications extend. The entry point for
@@ -16,6 +17,9 @@ import javafx.stage.Stage;
  */
 
 public class MainView extends Application {
+	static double xOffset = 0;
+    static double yOffset = 0;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -31,6 +35,8 @@ public class MainView extends Application {
 		LogInView logInView = new LogInView();
 		CreateUserView createUserView = new CreateUserView();		
 		TextEdit textStyle = new TextEdit();
+		
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		
 		textStyle.setTextValue("Comic Sans MS", 14.0, 12.0, 16.0);
 		createUserView.setCreateUserWindow(primaryStage);

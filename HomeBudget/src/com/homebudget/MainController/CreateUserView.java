@@ -3,14 +3,22 @@ package com.homebudget.MainController;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TextEdit;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -77,7 +85,26 @@ public class CreateUserView {
 		ConfigureView.rewriteUserPasswordField = new PasswordField();
 		ConfigureView.rewriteUserPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
-		ConfigureView.layout2 = new VBox(20);
+		ConfigureView.layout2 = new VBox(20);	
+		ConfigureView.layout2.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				MainView.xOffset = event.getSceneX();
+				MainView.yOffset = event.getSceneY();
+			}
+		});
+
+		ConfigureView.layout2.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setX(event.getScreenX() - MainView.xOffset);
+				primaryStage.setY(event.getScreenY() - MainView.yOffset);
+			}
+		});
+		
+		ConfigureView.layout2.setBorder(new Border(new BorderStroke(Color.BLACK, 
+	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
 		ConfigureView.layout2.getChildren().addAll(ConfigureView.createUserLabel, ConfigureView.createUserGrid,
 				ConfigureView.userButtonsGrid, ConfigureView.createUserFailed);
 		ConfigureView.layout2.setAlignment(Pos.CENTER);

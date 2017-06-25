@@ -5,14 +5,22 @@ import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -75,13 +83,33 @@ public class LogInView {
 		ConfigureView.buttonsGrid.setHgap(10);
 
 		ConfigureView.layout1 = new VBox(20);
+		ConfigureView.layout1.setStyle("-fx-border-color: black;");
+		ConfigureView.layout1.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				MainView.xOffset = event.getSceneX();
+				MainView.yOffset = event.getSceneY();
+			}
+		});
+
+		ConfigureView.layout1.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				primaryStage.setX(event.getScreenX() - MainView.xOffset);
+				primaryStage.setY(event.getScreenY() - MainView.yOffset);
+			}
+		});
+
+		ConfigureView.layout1.setBorder(new Border(new BorderStroke(Color.BLACK, 
+	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
 		ConfigureView.layout1.getChildren().addAll(ConfigureView.logInLabel, ConfigureView.logIngrid,
 				ConfigureView.buttonsGrid, ConfigureView.logInFailedInformation);
 		ConfigureView.layout1.setStyle("-fx-background-color: #FFFFFF");
 
 		ConfigureView.layout1.setAlignment(Pos.CENTER);
 		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 400, 250);
-		
+
 		primaryStage.setScene(ConfigureView.logInScene);
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
