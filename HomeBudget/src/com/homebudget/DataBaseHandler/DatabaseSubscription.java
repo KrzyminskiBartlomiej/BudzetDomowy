@@ -117,12 +117,15 @@ public class DatabaseSubscription {
 	 * 
 	 * @param stringToBeChecked
 	 *            string value to be checked
+	 * @param wordLength
+	 *            minimal length of given word
+	 * 
 	 * @return true if string is longer, false if it isn't
 	 * 
 	 */
 
-	public static boolean checkCredintialsLength(String stringToBeChecked) {
-		return stringToBeChecked.length() > 4 ? true : false;
+	public static boolean checkCredintialsLength(String stringToBeChecked, int wordLength) {
+		return stringToBeChecked.length() > wordLength ? true : false;
 	}
 
 	/**

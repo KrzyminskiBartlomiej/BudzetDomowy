@@ -102,9 +102,9 @@ public class CreateUserView {
 	public void createUser(String userName, String userPassword, Label showLabel) {
 		if (DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "User already exist", "red");
-		} else if (DatabaseSubscription.checkCredintialsLength(userName) == false) {
+		} else if (DatabaseSubscription.checkCredintialsLength(userName, 4) == false) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");
-		} else if (DatabaseSubscription.checkCredintialsLength(userPassword) == false) {
+		} else if (DatabaseSubscription.checkCredintialsLength(userPassword, 4) == false) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "Your password must contain at least 5 characters", "red");
 		} else if (ConfigureView.rewriteUserPasswordField.getText().equals(userPassword) == false) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "Both passwords must be the same", "red");

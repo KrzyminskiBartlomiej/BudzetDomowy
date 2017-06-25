@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Class that is responsible for support expensive addition handling procedure.
@@ -55,11 +56,24 @@ public class ExpensiveAdditionHandler {
 		Label costValue = new Label("Cost value");
 		TextField costValueField = new TextField();
 
+		Label costCreatorAlert = new Label("");
+		costCreatorAlert.setVisible(false);
+		costCreatorAlert.setTextAlignment(TextAlignment.CENTER);
+		costCreatorAlert.setMaxWidth(200);
+		;
+
 		Button create = new Button("Create!");
 		create.setMaxWidth(200);
 		create.setAlignment(Pos.BOTTOM_CENTER);
-		create.setOnAction(e -> addDescribedExpenseToDatabase(expensiveCategory.getSelectionModel().getSelectedItem(),
-				costNameField.getText(), costValueField.getText()));
+		create.setOnAction(e -> costAddValidator(expensiveCategory.getSelectionModel().getSelectedItem(),
+				costNameField.getText(), costValueField.getText(), costCreatorAlert));
+
+		MainApplicationView goBack = new MainApplicationView();
+
+		Button cancel = new Button("Cancel");
+		cancel.setMaxWidth(200);
+		cancel.setAlignment(Pos.BOTTOM_CENTER);
+		cancel.setOnAction(e -> ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu()));
 
 		decisionBox.getChildren().add(expensiveCategory);
 		decisionBox.getChildren().add(costName);
@@ -67,6 +81,8 @@ public class ExpensiveAdditionHandler {
 		decisionBox.getChildren().add(costValue);
 		decisionBox.getChildren().add(costValueField);
 		decisionBox.getChildren().add(create);
+		decisionBox.getChildren().add(cancel);
+		decisionBox.getChildren().add(costCreatorAlert);
 
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
@@ -103,5 +119,33 @@ public class ExpensiveAdditionHandler {
 		MainApplicationView goBack = new MainApplicationView();
 		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
 		TableViewHandler.tableRefresher();
+	}
+
+	/**
+	 * Checks if all mandatory field are correctly filled. If not it raises a
+	 * specific alert, otherwise it allows to create new outcome.
+	 * 
+	 * @param costType
+	 *            value from expensiveCategory, if there are no options marked
+	 *            it passes null
+	 * @param costName
+	 *            name of cost
+	 * @param costValue
+	 *            value of cost
+	 * @param showTo
+	 *            label where the warring will be shown
+	 *            
+	 */
+
+	public void costAddValidator(String costType, String costName, String costValue, Label showTo) {
+		if (costType == null)
+			DatabaseSubscription.showWarning(showTo, 1.8, "Check cost Type!", "red");
+		else if (DatabaseSubscription.checkCredintialsLength(costName, 1) == false)
+			DatabaseSubscription.showWarning(showTo, 1.8, "Fill cost name field!", "red");
+		else if (DatabaseSubscription.checkCredintialsLength(costValue, 1) == false)
+			DatabaseSubscription.showWarning(showTo, 1.8, "Set cost value!", "red");
+		else {
+			addDescribedExpenseToDatabase(costType, costName, costValue);
+		}
 	}
 }
