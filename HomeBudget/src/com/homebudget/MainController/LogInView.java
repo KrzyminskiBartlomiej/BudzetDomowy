@@ -37,7 +37,7 @@ public class LogInView {
 	 * 
 	 */
 
-	public void setLogInWindow() {
+	public void setLogInWindow(Stage primaryStage) {
 		ConfigureView.logInLabel = new Label("Welcome into Home Budget 2017");
 		ConfigureView.logInLabel.setFont(new Font(TextEdit.fontType, TextEdit.titleFontSize));
 
@@ -80,7 +80,11 @@ public class LogInView {
 		ConfigureView.layout1.setStyle("-fx-background-color: #FFFFFF");
 
 		ConfigureView.layout1.setAlignment(Pos.CENTER);
-		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 400, 220);
+		ConfigureView.logInScene = new Scene(ConfigureView.layout1, 400, 250);
+		
+		primaryStage.setScene(ConfigureView.logInScene);
+		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
 
 		ConfigureView.userName = new Label("User name:");
 		ConfigureView.userName.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));

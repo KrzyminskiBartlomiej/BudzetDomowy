@@ -1,6 +1,8 @@
 package com.homebudget.MainController;
 
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
+import com.homebudget.Utils.TextEdit;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  * This public class is used to create specific create user window view and
@@ -31,15 +35,19 @@ public class CreateUserView {
 	 * 
 	 */
 
-	public void setCreateUserWindow() {
+	public void setCreateUserWindow(Stage primaryStage) {
 		ConfigureView.createUserLabel = new Label("Create new user");
-		ConfigureView.createUserLabel.setStyle("-fx-font-size: 12pt;");
+		ConfigureView.createUserLabel.setFont(new Font(TextEdit.fontType, TextEdit.titleFontSize));
 
 		ConfigureView.createNewUser = new Button("Create User");
+		ConfigureView.createNewUser.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
+		ConfigureView.createNewUser.setStyle("-fx-background-color: #83D18D");
 		ConfigureView.createNewUser.setOnAction(e -> createUser(ConfigureView.setUserField.getText(),
 				ConfigureView.createUserPasswordField.getText(), ConfigureView.createUserFailed));
 
 		ConfigureView.backToLogInScene = new Button("Back");
+		ConfigureView.backToLogInScene.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
+		ConfigureView.backToLogInScene.setStyle("-fx-background-color: #FFA7A0");
 		ConfigureView.backToLogInScene.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.logInScene));
 
 		ConfigureView.createUserGrid = new GridPane();
@@ -55,19 +63,29 @@ public class CreateUserView {
 		ConfigureView.createUserFailed.setVisible(false);
 
 		ConfigureView.setUserName = new Label("Your user name:");
+		ConfigureView.setUserName.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));
 		ConfigureView.setUserField = new TextField();
+		ConfigureView.setUserField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.setUserPassword = new Label("Your user password:");
+		ConfigureView.setUserPassword.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));
 		ConfigureView.createUserPasswordField = new PasswordField();
+		ConfigureView.createUserPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.rewriteUserPassword = new Label("Rewrite your password:");
+		ConfigureView.rewriteUserPassword.setFont(new Font(TextEdit.fontType, TextEdit.credFontSize));
 		ConfigureView.rewriteUserPasswordField = new PasswordField();
+		ConfigureView.rewriteUserPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.layout2 = new VBox(20);
 		ConfigureView.layout2.getChildren().addAll(ConfigureView.createUserLabel, ConfigureView.createUserGrid,
 				ConfigureView.userButtonsGrid, ConfigureView.createUserFailed);
 		ConfigureView.layout2.setAlignment(Pos.CENTER);
-		ConfigureView.signUpScene = new Scene(ConfigureView.layout2, 300, 300);
+		ConfigureView.layout2.setStyle("-fx-background-color: #FFFFFF");
+		ConfigureView.signUpScene = new Scene(ConfigureView.layout2, 400, 250);
+		primaryStage.setScene(ConfigureView.signUpScene);
+		primaryStage.setResizable(false);
+		primaryStage.centerOnScreen();
 
 		ConfigureView.createUserGrid.add(ConfigureView.setUserName, 0, 0);
 		ConfigureView.createUserGrid.add(ConfigureView.setUserField, 1, 0);

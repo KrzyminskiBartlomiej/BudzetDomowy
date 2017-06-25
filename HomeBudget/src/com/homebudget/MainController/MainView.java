@@ -33,8 +33,8 @@ public class MainView extends Application {
 		TextEdit textStyle = new TextEdit();
 		
 		textStyle.setTextValue("Comic Sans MS", 14.0, 12.0, 16.0);
-		createUserView.setCreateUserWindow();
-		logInView.setLogInWindow();		
+		createUserView.setCreateUserWindow(primaryStage);
+		logInView.setLogInWindow(primaryStage);		
 		logInView.invokeLogInWindow(primaryStage);
 	}
 }
