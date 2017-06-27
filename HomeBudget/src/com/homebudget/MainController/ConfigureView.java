@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -16,6 +17,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +37,8 @@ public class ConfigureView {
 
 	// Common fields
 	public static Stage window;
+	static double xOffset = 0;
+    static double yOffset = 0;
 
 	// Log In Window fields
 	public static Scene logInScene;
@@ -58,13 +62,42 @@ public class ConfigureView {
 	// Main Application window fields
 	public static Scene applicationScene;
 	public static BorderPane mainBorderPane;
-	
+
 	public static Button addNew, showExpense, showJuxtaposition;
 	public static Image logoImage;
 	public static ImageView picture;
+
+	/**
+	 * It basically adds border to given button
+	 * 
+	 * @param toBorder
+	 *            button to be bordered
+	 * 
+	 */
+
+	public static void addBorderToButton(Button toBorder) {
+		toBorder.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+	}
+
+	public static Button customButtonCreator(String buttonName, Font fontType, String buttonStyle) {
+		Button buttonToBeCustomized = new Button(buttonName);
+		buttonToBeCustomized.setFont(fontType);
+		buttonToBeCustomized.setStyle(buttonStyle);
+		return buttonToBeCustomized;
+	}
 	
-	public static void addBorderToButton(Button toBorder){
-		toBorder.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+	public static void lambdaSupplier(Runnable function){
+		function.run();
+	}
+	
+	public static void mousePressHandler(MouseEvent event){
+		ConfigureView.xOffset = event.getSceneX();
+		ConfigureView.yOffset = event.getSceneY();
+	}
+	
+	public static void mouseDragHandler(MouseEvent event, Stage primaryStage){
+		primaryStage.setX(event.getScreenX() - ConfigureView.xOffset);
+		primaryStage.setY(event.getScreenY() - ConfigureView.yOffset);
 	}
 }

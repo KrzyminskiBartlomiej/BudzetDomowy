@@ -17,9 +17,6 @@ import javafx.stage.StageStyle;
  */
 
 public class MainView extends Application {
-	static double xOffset = 0;
-    static double yOffset = 0;
-	
 	public static void main(String[] args) {
 		launch(args);
 	}

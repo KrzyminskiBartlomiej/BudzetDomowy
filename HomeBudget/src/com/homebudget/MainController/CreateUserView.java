@@ -3,14 +3,11 @@ package com.homebudget.MainController;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TextEdit;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -47,16 +44,14 @@ public class CreateUserView {
 		ConfigureView.createUserLabel = new Label("Create new user");
 		ConfigureView.createUserLabel.setFont(new Font(TextEdit.fontType, TextEdit.titleFontSize));
 
-		ConfigureView.createNewUser = new Button("Create User");
-		ConfigureView.createNewUser.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
-		ConfigureView.createNewUser.setStyle("-fx-background-color: #83D18D");
+		ConfigureView.createNewUser = ConfigureView.customButtonCreator("Create User",
+				new Font(TextEdit.fontType, TextEdit.plainFontSize), "-fx-background-color: #83D18D");
 		ConfigureView.createNewUser.setOnAction(e -> createUser(ConfigureView.setUserField.getText(),
 				ConfigureView.createUserPasswordField.getText(), ConfigureView.createUserFailed));
 		ConfigureView.createNewUser.setDefaultButton(true);
 
-		ConfigureView.backToLogInScene = new Button("Back");
-		ConfigureView.backToLogInScene.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
-		ConfigureView.backToLogInScene.setStyle("-fx-background-color: #FFA7A0");
+		ConfigureView.backToLogInScene = ConfigureView.customButtonCreator("Back",
+				new Font(TextEdit.fontType, TextEdit.plainFontSize), "-fx-background-color: #FFA7A0");
 		ConfigureView.backToLogInScene.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.logInScene));
 
 		ConfigureView.createUserGrid = new GridPane();
@@ -87,21 +82,8 @@ public class CreateUserView {
 		ConfigureView.rewriteUserPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
 		ConfigureView.layout2 = new VBox(20);
-		ConfigureView.layout2.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				MainView.xOffset = event.getSceneX();
-				MainView.yOffset = event.getSceneY();
-			}
-		});
-
-		ConfigureView.layout2.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				primaryStage.setX(event.getScreenX() - MainView.xOffset);
-				primaryStage.setY(event.getScreenY() - MainView.yOffset);
-			}
-		});
+		ConfigureView.layout2.setOnMousePressed(e -> ConfigureView.mousePressHandler(e));
+		ConfigureView.layout2.setOnMouseDragged(e -> ConfigureView.mouseDragHandler(e, primaryStage));
 
 		ConfigureView.layout2.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

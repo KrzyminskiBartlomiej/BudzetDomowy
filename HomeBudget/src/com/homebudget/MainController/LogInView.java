@@ -5,14 +5,11 @@ import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -49,27 +46,21 @@ public class LogInView {
 		ConfigureView.logInLabel = new Label("Welcome into Home Budget 2017");
 		ConfigureView.logInLabel.setFont(new Font(TextEdit.fontType, TextEdit.titleFontSize));
 
-		ConfigureView.createUserButton = new Button("Sign Up");
-		ConfigureView.createUserButton.centerShapeProperty();
-		ConfigureView.createUserButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
-		ConfigureView.createUserButton.setStyle("-fx-background-color: #ECF99C");
+		ConfigureView.createUserButton = ConfigureView.customButtonCreator("Sign Up",
+				new Font(TextEdit.fontType, TextEdit.plainFontSize), "-fx-background-color: #ECF99C");
 		ConfigureView.createUserButton.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.signUpScene));
 
 		ConfigureView.userNameField = new TextField();
 		ConfigureView.userNameField.setStyle("-fx-background-color: #DCDCDC");
 
-		ConfigureView.logInButton = new Button("Sign in");
-		ConfigureView.logInButton.centerShapeProperty();
-		ConfigureView.logInButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
-		ConfigureView.logInButton.setStyle("-fx-background-color: #83D18D");
+		ConfigureView.logInButton = ConfigureView.customButtonCreator("Sign In",
+				new Font(TextEdit.fontType, TextEdit.plainFontSize), "-fx-background-color: #83D18D");
 		ConfigureView.logInButton.setOnAction(e -> checkCredentials(ConfigureView.userNameField.getText(),
 				ConfigureView.userPasswordField.getText()));
 		ConfigureView.logInButton.setDefaultButton(true);
 
-		ConfigureView.exitButton = new Button("Exit");
-		ConfigureView.exitButton.centerShapeProperty();
-		ConfigureView.exitButton.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
-		ConfigureView.exitButton.setStyle("-fx-background-color: #FFA7A0");
+		ConfigureView.exitButton = ConfigureView.customButtonCreator("Exit",
+				new Font(TextEdit.fontType, TextEdit.plainFontSize), "-fx-background-color: #FFA7A0");
 		ConfigureView.exitButton.setOnAction(e -> Platform.exit());
 
 		ConfigureView.logInFailedInformation = new Label();
@@ -85,21 +76,8 @@ public class LogInView {
 
 		ConfigureView.layout1 = new VBox(20);
 		ConfigureView.layout1.setStyle("-fx-border-color: black;");
-		ConfigureView.layout1.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				MainView.xOffset = event.getSceneX();
-				MainView.yOffset = event.getSceneY();
-			}
-		});
-
-		ConfigureView.layout1.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				primaryStage.setX(event.getScreenX() - MainView.xOffset);
-				primaryStage.setY(event.getScreenY() - MainView.yOffset);
-			}
-		});
+		ConfigureView.layout1.setOnMousePressed(e -> ConfigureView.mousePressHandler(e));
+		ConfigureView.layout1.setOnMouseDragged(e -> ConfigureView.mouseDragHandler(e, primaryStage));
 
 		ConfigureView.layout1.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

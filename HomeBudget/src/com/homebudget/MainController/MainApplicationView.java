@@ -8,7 +8,6 @@ import com.homebudget.Utils.ExpensiveAdditionHandler;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -18,7 +17,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -49,21 +47,8 @@ public class MainApplicationView {
 
 	public void setMainApplicationView(Stage primaryStage) {
 		ConfigureView.mainBorderPane = new BorderPane();
-		ConfigureView.mainBorderPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				MainView.xOffset = event.getSceneX();
-				MainView.yOffset = event.getSceneY();
-			}
-		});
-
-		ConfigureView.mainBorderPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				primaryStage.setX(event.getScreenX() - MainView.xOffset);
-				primaryStage.setY(event.getScreenY() - MainView.yOffset);
-			}
-		});
+		ConfigureView.mainBorderPane.setOnMousePressed(e -> ConfigureView.mousePressHandler(e));
+		ConfigureView.mainBorderPane.setOnMouseDragged(e -> ConfigureView.mouseDragHandler(e, primaryStage));
 		
 		ConfigureView.mainBorderPane.setBorder(new Border(new BorderStroke(Color.BLACK, 
 	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
