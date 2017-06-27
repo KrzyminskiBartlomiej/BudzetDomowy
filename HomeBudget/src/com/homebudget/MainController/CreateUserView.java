@@ -86,7 +86,7 @@ public class CreateUserView {
 		ConfigureView.rewriteUserPasswordField = new PasswordField();
 		ConfigureView.rewriteUserPasswordField.setStyle("-fx-background-color: #DCDCDC");
 
-		ConfigureView.layout2 = new VBox(20);	
+		ConfigureView.layout2 = new VBox(20);
 		ConfigureView.layout2.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -102,10 +102,10 @@ public class CreateUserView {
 				primaryStage.setY(event.getScreenY() - MainView.yOffset);
 			}
 		});
-		
-		ConfigureView.layout2.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		
+
+		ConfigureView.layout2.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		ConfigureView.layout2.getChildren().addAll(ConfigureView.createUserLabel, ConfigureView.createUserGrid,
 				ConfigureView.userButtonsGrid, ConfigureView.createUserFailed);
 		ConfigureView.layout2.setAlignment(Pos.CENTER);
@@ -146,7 +146,10 @@ public class CreateUserView {
 	 */
 
 	public void createUser(String userName, String userPassword, Label showLabel) {
-		if (DatabaseSubscription.checkUserName(userName) == true) {
+		if (DatabaseSubscription.checkIncorrectChars(userName) == true
+				|| DatabaseSubscription.checkIncorrectChars(userPassword) == true) {
+			DatabaseSubscription.showWarning(showLabel, 1.8, "User name or password can not contain \"\\\"", "red");
+		} else if (DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "User already exist", "red");
 		} else if (DatabaseSubscription.checkCredintialsLength(userName, 4) == false) {
 			DatabaseSubscription.showWarning(showLabel, 1.8, "Username must contain at least 5 characters", "red");

@@ -129,6 +129,19 @@ public class DatabaseSubscription {
 	}
 
 	/**
+	 * Checks if given string contains incorrect chars, in that case "\".
+	 * 
+	 * @param stringToBeChecked
+	 *            string value to be checked
+	 * @return true if contains incorrect char, otherwise true
+	 * 
+	 */
+
+	public static boolean checkIncorrectChars(String stringToBeChecked) {
+		return stringToBeChecked.contains("\\") ? true : false;
+	}
+
+	/**
 	 * Used to show information about current state of work with application.
 	 * 
 	 * @param showLabel

@@ -101,9 +101,9 @@ public class LogInView {
 			}
 		});
 
-		ConfigureView.layout1.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		
+		ConfigureView.layout1.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		ConfigureView.layout1.getChildren().addAll(ConfigureView.logInLabel, ConfigureView.logIngrid,
 				ConfigureView.buttonsGrid, ConfigureView.logInFailedInformation);
 		ConfigureView.layout1.setStyle("-fx-background-color: #FFFFFF");
@@ -149,7 +149,11 @@ public class LogInView {
 	 */
 
 	public void checkCredentials(String userName, String password) {
-		if (DatabaseSubscription.checkPassword(userName, password) == true
+		if (DatabaseSubscription.checkIncorrectChars(userName) == true
+				|| DatabaseSubscription.checkIncorrectChars(password) == true) {
+			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 1.8,
+					"User name or password can not contain \"\\\"", "red");
+		} else if (DatabaseSubscription.checkPassword(userName, password) == true
 				&& DatabaseSubscription.checkUserName(userName) == true) {
 			DatabaseConnector.setUsername(userName);
 			ConfigureView.userNameField.clear();
