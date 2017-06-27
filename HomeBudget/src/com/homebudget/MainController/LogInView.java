@@ -64,6 +64,7 @@ public class LogInView {
 		ConfigureView.logInButton.setStyle("-fx-background-color: #83D18D");
 		ConfigureView.logInButton.setOnAction(e -> checkCredentials(ConfigureView.userNameField.getText(),
 				ConfigureView.userPasswordField.getText()));
+		ConfigureView.logInButton.setDefaultButton(true);
 
 		ConfigureView.exitButton = new Button("Exit");
 		ConfigureView.exitButton.centerShapeProperty();

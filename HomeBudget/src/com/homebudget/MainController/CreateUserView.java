@@ -52,6 +52,7 @@ public class CreateUserView {
 		ConfigureView.createNewUser.setStyle("-fx-background-color: #83D18D");
 		ConfigureView.createNewUser.setOnAction(e -> createUser(ConfigureView.setUserField.getText(),
 				ConfigureView.createUserPasswordField.getText(), ConfigureView.createUserFailed));
+		ConfigureView.createNewUser.setDefaultButton(true);
 
 		ConfigureView.backToLogInScene = new Button("Back");
 		ConfigureView.backToLogInScene.setFont(new Font(TextEdit.fontType, TextEdit.plainFontSize));
