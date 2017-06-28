@@ -38,7 +38,7 @@ public class ConfigureView {
 	// Common fields
 	public static Stage window;
 	static double xOffset = 0;
-    static double yOffset = 0;
+	static double yOffset = 0;
 
 	// Log In Window fields
 	public static Scene logInScene;
@@ -86,17 +86,17 @@ public class ConfigureView {
 		buttonToBeCustomized.setStyle(buttonStyle);
 		return buttonToBeCustomized;
 	}
-	
-	public static void lambdaSupplier(Runnable function){
+
+	public static void lambdaSupplier(Runnable function) {
 		function.run();
 	}
-	
-	public static void mousePressHandler(MouseEvent event){
+
+	public static void mousePressHandler(MouseEvent event) {
 		ConfigureView.xOffset = event.getSceneX();
 		ConfigureView.yOffset = event.getSceneY();
 	}
-	
-	public static void mouseDragHandler(MouseEvent event, Stage primaryStage){
+
+	public static void mouseDragHandler(MouseEvent event, Stage primaryStage) {
 		primaryStage.setX(event.getScreenX() - ConfigureView.xOffset);
 		primaryStage.setY(event.getScreenY() - ConfigureView.yOffset);
 	}

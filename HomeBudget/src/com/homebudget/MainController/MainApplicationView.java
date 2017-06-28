@@ -49,10 +49,10 @@ public class MainApplicationView {
 		ConfigureView.mainBorderPane = new BorderPane();
 		ConfigureView.mainBorderPane.setOnMousePressed(e -> ConfigureView.mousePressHandler(e));
 		ConfigureView.mainBorderPane.setOnMouseDragged(e -> ConfigureView.mouseDragHandler(e, primaryStage));
-		
-		ConfigureView.mainBorderPane.setBorder(new Border(new BorderStroke(Color.BLACK, 
-	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		
+
+		ConfigureView.mainBorderPane.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		ConfigureView.mainBorderPane.setTop(addTopMenu());
 		ConfigureView.mainBorderPane.setLeft(addLeftBottomMenu());
 
