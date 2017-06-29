@@ -14,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
@@ -141,16 +140,11 @@ public class MainApplicationView {
 
 	public static void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
-		ScrollPane scrolledTable = new ScrollPane();
 		VBox tableBox = new VBox();
 
 		newTable.getAllData();
 		newTable.setTableStyle();
-		scrolledTable.setContent(newTable.getTable());
-		scrolledTable.autosize();
-		scrolledTable.fitToHeightProperty();
-		scrolledTable.fitToWidthProperty();
-		tableBox.getChildren().add(scrolledTable);
+		tableBox.getChildren().add(newTable.getTable());
 		tableBox.setPadding(new Insets(8, 8, 8, 8));
 
 		ConfigureView.mainBorderPane.setCenter(tableBox);
