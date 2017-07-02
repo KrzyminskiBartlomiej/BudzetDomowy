@@ -1,5 +1,7 @@
 package com.homebudget.MainController;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,6 +41,8 @@ public class ConfigureView {
 	public static Stage window;
 	static double xOffset = 0;
 	static double yOffset = 0;
+	public static ObservableList<String> costTypeItems = FXCollections.observableArrayList("Food", "Junk Food", "Car",
+			"Home", "Clothes", "Health", "Alcohol");
 
 	// Log In Window fields
 	public static Scene logInScene;

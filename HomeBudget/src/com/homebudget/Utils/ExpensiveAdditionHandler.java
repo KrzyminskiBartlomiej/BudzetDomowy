@@ -8,8 +8,6 @@ import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.MainController.ConfigureView;
 import com.homebudget.MainController.MainApplicationView;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -45,9 +43,7 @@ public class ExpensiveAdditionHandler {
 		decisionBox.setStyle("-fx-background-color: #D4805D");
 
 		ListView<String> expensiveCategory = new ListView<String>();
-		ObservableList<String> items = FXCollections.observableArrayList("Food", "Junk Food", "Car", "Home", "Clothes",
-				"Health", "Alcohol");
-		expensiveCategory.setItems(items);
+		expensiveCategory.setItems(ConfigureView.costTypeItems);
 		expensiveCategory.setPrefHeight(100);
 
 		Label costName = new Label("Cost name");

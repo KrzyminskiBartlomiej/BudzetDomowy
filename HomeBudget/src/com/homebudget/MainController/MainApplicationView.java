@@ -4,12 +4,14 @@ import java.util.Optional;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
+import com.homebudget.Utils.ChartViewHandler;
 import com.homebudget.Utils.ExpensiveAdditionHandler;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -124,6 +126,7 @@ public class MainApplicationView {
 
 		Button showJuxtaposition = new Button("Make Juxtaposition");
 		showJuxtaposition.setPrefSize(130, 20);
+		showJuxtaposition.setOnAction(e -> createChartView());
 
 		leftBottomMenu.getChildren().add(addNew);
 		leftBottomMenu.getChildren().add(showExpense);
@@ -146,8 +149,21 @@ public class MainApplicationView {
 		newTable.setTableStyle();
 		tableBox.getChildren().add(newTable.getTable());
 		tableBox.setPadding(new Insets(8, 8, 8, 8));
-
+	
 		ConfigureView.mainBorderPane.setCenter(tableBox);
+	}
+	
+	public static void createChartView(){	
+		VBox chartBox = new VBox();
+		
+		ChartViewHandler pieChart = new ChartViewHandler();
+		pieChart.createDataForPieChart();
+		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
+        chart.setTitle("Your Expensives");
+
+        chartBox.getChildren().add(chart);
+        chartBox.setPadding(new Insets(8, 8, 8, 8));
+        ConfigureView.mainBorderPane.setCenter(chartBox);
 	}
 
 	/**
