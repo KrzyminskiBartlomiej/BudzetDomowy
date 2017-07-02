@@ -28,7 +28,7 @@ import javafx.util.Callback;
 @SuppressWarnings("rawtypes")
 public class TableViewHandler extends TableView {
 	private TableView tableView;
-	private ObservableList<ObservableList> data;
+	public static ObservableList<ObservableList> data;
 
 	/**
 	 * Used to get all data from user view. For now this method downloads all
