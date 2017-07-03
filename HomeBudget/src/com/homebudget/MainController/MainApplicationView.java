@@ -154,9 +154,11 @@ public class MainApplicationView {
 	}
 	
 	public static void createChartView(){	
-		VBox chartBox = new VBox();
-		
+		VBox chartBox = new VBox();		
 		ChartViewHandler pieChart = new ChartViewHandler();
+		TableViewHandler newTable = new TableViewHandler();
+		
+		newTable.getAllData();
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
         chart.setTitle("Your Expensives");
