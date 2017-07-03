@@ -130,7 +130,7 @@ public class ExpensiveAdditionHandler {
 	 *            value of cost
 	 * @param showTo
 	 *            label where the warring will be shown
-	 *            
+	 * 
 	 */
 
 	public void costAddValidator(String costType, String costName, String costValue, Label showTo) {
@@ -141,6 +141,7 @@ public class ExpensiveAdditionHandler {
 		else if (DatabaseSubscription.checkCredintialsLength(costValue, 1) == false)
 			DatabaseSubscription.showWarning(showTo, 1.8, "Set cost value!", "red");
 		else {
+			if (costValue.contains(",")) costValue = costValue.replace(",",".");			
 			addDescribedExpenseToDatabase(costType, costName, costValue);
 		}
 	}

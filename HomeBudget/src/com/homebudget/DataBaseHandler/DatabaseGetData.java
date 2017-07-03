@@ -17,7 +17,7 @@ import java.util.Set;
  */
 
 public class DatabaseGetData {
-	public static List<Integer> testData = new ArrayList<Integer>();
+	public static List<Double> testData = new ArrayList<Double>();
 	public static Set<String> userName = new HashSet<String>();
 
 	/**
@@ -32,7 +32,7 @@ public class DatabaseGetData {
 
 	public static void getIntData(ResultSet rs) throws SQLException {
 		while (rs.next()) {
-			testData.add(rs.getInt("valueCost"));
+			testData.add(rs.getDouble("valueCost"));
 		}
 	}
 
