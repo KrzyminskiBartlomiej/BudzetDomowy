@@ -9,6 +9,7 @@ import com.homebudget.Utils.ExpensiveAdditionHandler;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -16,8 +17,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -127,10 +130,15 @@ public class MainApplicationView {
 		Button showJuxtaposition = new Button("Make Juxtaposition");
 		showJuxtaposition.setPrefSize(130, 20);
 		showJuxtaposition.setOnAction(e -> createChartView());
+		
+		Button delete = new Button("Delete");
+		delete.setPrefSize(130, 20);
+		delete.setOnAction(e -> deleteCost());
 
 		leftBottomMenu.getChildren().add(addNew);
 		leftBottomMenu.getChildren().add(showExpense);
 		leftBottomMenu.getChildren().add(showJuxtaposition);
+		leftBottomMenu.getChildren().add(delete);
 
 		return leftBottomMenu;
 	}
@@ -144,28 +152,39 @@ public class MainApplicationView {
 	public static void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
 		VBox tableBox = new VBox();
-
+		
 		newTable.getAllData();
 		newTable.setTableStyle();
+
 		tableBox.getChildren().add(newTable.getTable());
 		tableBox.setPadding(new Insets(8, 8, 8, 8));
-	
+		tableBox.setOnContextMenuRequested(e -> rightClickContextMenu(e));
+
 		ConfigureView.mainBorderPane.setCenter(tableBox);
 	}
 	
-	public static void createChartView(){	
-		VBox chartBox = new VBox();		
+	public static void deleteCost(){
+		TableView<?> table = new TableViewHandler();
+		ObservableList<?> rowSelected, allSelected;
+		allSelected = table.getItems();
+		rowSelected = table.getSelectionModel().getSelectedItems();
+		
+		rowSelected.forEach(allSelected::remove);
+	}
+
+	public static void createChartView() {
+		VBox chartBox = new VBox();
 		ChartViewHandler pieChart = new ChartViewHandler();
 		TableViewHandler newTable = new TableViewHandler();
-		
+
 		newTable.getAllData();
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
-        chart.setTitle("Your Expensives");
+		chart.setTitle("Your Expensives");
 
-        chartBox.getChildren().add(chart);
-        chartBox.setPadding(new Insets(8, 8, 8, 8));
-        ConfigureView.mainBorderPane.setCenter(chartBox);
+		chartBox.getChildren().add(chart);
+		chartBox.setPadding(new Insets(8, 8, 8, 8));
+		ConfigureView.mainBorderPane.setCenter(chartBox);
 	}
 
 	/**
@@ -215,5 +234,9 @@ public class MainApplicationView {
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 2.4,
 					"Your account has been deleted, see You again!", "green");
 		}
+	}
+
+	public static void rightClickContextMenu(ContextMenuEvent event) {
+
 	}
 }

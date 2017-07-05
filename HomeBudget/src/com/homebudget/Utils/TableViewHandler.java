@@ -66,6 +66,7 @@ public class TableViewHandler extends TableView {
 
 			while (rs.next()) {
 				ObservableList<String> row = FXCollections.observableArrayList();
+				
 				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 					row.add(rs.getString(i));
 				}

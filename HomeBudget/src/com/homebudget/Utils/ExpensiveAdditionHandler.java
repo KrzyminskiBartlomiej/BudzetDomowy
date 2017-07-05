@@ -138,7 +138,7 @@ public class ExpensiveAdditionHandler {
 			DatabaseSubscription.showWarning(showTo, 1.8, "Check cost Type!", "red");
 		else if (DatabaseSubscription.checkCredintialsLength(costName, 1) == false)
 			DatabaseSubscription.showWarning(showTo, 1.8, "Fill cost name field!", "red");
-		else if (DatabaseSubscription.checkCredintialsLength(costValue, 1) == false)
+		else if (DatabaseSubscription.checkCredintialsLength(costValue, 0) == false)
 			DatabaseSubscription.showWarning(showTo, 1.8, "Set cost value!", "red");
 		else {
 			if (costValue.contains(",")) costValue = costValue.replace(",",".");			
