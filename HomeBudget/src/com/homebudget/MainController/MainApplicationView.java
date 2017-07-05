@@ -20,7 +20,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -67,7 +66,7 @@ public class MainApplicationView {
 	}
 
 	/**
-	 * Creates content for top menu.
+	 * Creates content for the top menu.
 	 * 
 	 * @return created and configured HBox
 	 * 
@@ -106,7 +105,7 @@ public class MainApplicationView {
 	}
 
 	/**
-	 * Creates content for left side of application.
+	 * Creates content for the left side of application.
 	 * 
 	 * @return created and configured HBox
 	 * 
@@ -158,10 +157,14 @@ public class MainApplicationView {
 
 		tableBox.getChildren().add(newTable.getTable());
 		tableBox.setPadding(new Insets(8, 8, 8, 8));
-		tableBox.setOnContextMenuRequested(e -> rightClickContextMenu(e));
 
 		ConfigureView.mainBorderPane.setCenter(tableBox);
 	}
+	
+	/**
+	 * Deletes specific row from cost table.
+	 * 
+	 */
 	
 	public static void deleteCost(){
 		TableView<?> table = new TableViewHandler();
@@ -171,6 +174,11 @@ public class MainApplicationView {
 		
 		rowSelected.forEach(allSelected::remove);
 	}
+	
+	/**
+	 * Creates PieChart for juxtaposition purposes.
+	 * 
+	 */
 
 	public static void createChartView() {
 		VBox chartBox = new VBox();
@@ -234,9 +242,5 @@ public class MainApplicationView {
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 2.4,
 					"Your account has been deleted, see You again!", "green");
 		}
-	}
-
-	public static void rightClickContextMenu(ContextMenuEvent event) {
-
 	}
 }

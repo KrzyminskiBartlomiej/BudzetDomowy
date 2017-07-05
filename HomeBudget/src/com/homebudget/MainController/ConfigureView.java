@@ -84,6 +84,20 @@ public class ConfigureView {
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
 
+	/**
+	 * Creates specific button with given parameters, extension of simple button
+	 * constructor.
+	 * 
+	 * @param buttonName
+	 *            button to be customized
+	 * @param fontType
+	 *            button text font type
+	 * @param buttonStyle
+	 *            string value with CSS information
+	 * @return customized button
+	 * 
+	 */
+
 	public static Button customButtonCreator(String buttonName, Font fontType, String buttonStyle) {
 		Button buttonToBeCustomized = new Button(buttonName);
 		buttonToBeCustomized.setFont(fontType);
@@ -91,14 +105,30 @@ public class ConfigureView {
 		return buttonToBeCustomized;
 	}
 
-	public static void lambdaSupplier(Runnable function) {
-		function.run();
-	}
+	/**
+	 * Sets x-axis value and y-axis value while button pressed to pass current
+	 * mouse location.
+	 * 
+	 * @param event
+	 *            passed event
+	 * 
+	 */
 
 	public static void mousePressHandler(MouseEvent event) {
 		ConfigureView.xOffset = event.getSceneX();
 		ConfigureView.yOffset = event.getSceneY();
 	}
+
+	/**
+	 * Computes where primaryStage have to be moved. Calculation are based on
+	 * xOffset and yOffset variables.
+	 * 
+	 * @param event
+	 *            passed event
+	 * @param primaryStage
+	 *            stage to be moved
+	 *            
+	 */
 
 	public static void mouseDragHandler(MouseEvent event, Stage primaryStage) {
 		primaryStage.setX(event.getScreenX() - ConfigureView.xOffset);
