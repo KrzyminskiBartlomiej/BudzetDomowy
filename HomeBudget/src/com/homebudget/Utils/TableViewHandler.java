@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
+import com.homebudget.MainController.ConfigureView;
 import com.homebudget.MainController.MainApplicationView;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -54,7 +55,7 @@ public class TableViewHandler extends TableView {
 
 			for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 				final int j = i;
-				TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+				TableColumn col = new TableColumn(ConfigureView.tableColumnsNames.get(i));
 				col.setCellValueFactory(
 						new Callback<CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
 							public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {
