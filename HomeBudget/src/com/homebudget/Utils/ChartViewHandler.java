@@ -21,6 +21,7 @@ import javafx.scene.chart.PieChart;
 
 public class ChartViewHandler {
 	public static ObservableList<PieChart.Data> pieChartData;
+	private Double sumOfAllExpensives;
 
 	/**
 	 * This method generates data from specific observableArrayList, by addition
@@ -30,11 +31,13 @@ public class ChartViewHandler {
 
 	public void createDataForPieChart() {
 		pieChartData = FXCollections.observableArrayList();
+		sumOfAllExpensives = 0.0;
 		for (int i = 0; i < ConfigureView.costTypeItems.size(); i++) {
 			if (getSumForType(ConfigureView.costTypeItems.get(i)) != 0) {
 				pieChartData.add(new PieChart.Data(ConfigureView.costTypeItems.get(i),
 						getSumForType(ConfigureView.costTypeItems.get(i))));
 			}
+			sumOfAllExpensives += getSumForType(ConfigureView.costTypeItems.get(i));
 		}
 
 		pieChartData.forEach(
@@ -74,6 +77,15 @@ public class ChartViewHandler {
 				sumResult += Double.parseDouble(dataSplitter(TableViewHandler.data.get(i), 3));
 			}
 		}
+		sumResult = Math.floor(sumResult * 100) / 100;
 		return sumResult;
+	}
+
+	public Double getSumOfAllExpensives() {
+		return sumOfAllExpensives;
+	}
+
+	public void setSumOfAllExpensives(Double sumOfAllExpensives) {
+		this.sumOfAllExpensives = sumOfAllExpensives;
 	}
 }

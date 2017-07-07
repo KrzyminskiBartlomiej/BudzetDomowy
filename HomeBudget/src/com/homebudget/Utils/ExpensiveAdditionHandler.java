@@ -39,7 +39,7 @@ public class ExpensiveAdditionHandler {
 		decisionBox = new VBox();
 		decisionBox.setPadding(new Insets(10));
 		decisionBox.setSpacing(8);
-		decisionBox.setPrefWidth(174);
+		decisionBox.setPrefWidth(154);
 		decisionBox.setStyle("-fx-background-color: #D4805D");
 
 		ListView<String> expensiveCategory = new ListView<String>();

@@ -81,8 +81,8 @@ public class MainApplicationView {
 		Image homeBudgetLogo = new Image("File:resources/HBLogo.png");
 		ImageView hbLogoView = new ImageView();
 		hbLogoView.setImage(homeBudgetLogo);
-		hbLogoView.setFitHeight(150);
-		hbLogoView.setFitWidth(150);
+		hbLogoView.setFitHeight(120);
+		hbLogoView.setFitWidth(120);
 
 		Button deleteUser = new Button("Delete User");
 		deleteUser.setPrefSize(100, 20);
@@ -115,7 +115,7 @@ public class MainApplicationView {
 		VBox leftBottomMenu = new VBox();
 		leftBottomMenu.setPadding(new Insets(10));
 		leftBottomMenu.setSpacing(8);
-		leftBottomMenu.setPrefWidth(174);
+		leftBottomMenu.setPrefWidth(154);
 		leftBottomMenu.setStyle("-fx-background-color: #D4805D");
 
 		Button addNew = new Button("Add new...");
@@ -188,11 +188,11 @@ public class MainApplicationView {
 		newTable.getAllData();
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
-		chart.setTitle("Your Expensives");
+		chart.setTitle("Your Expensives : " + pieChart.getSumOfAllExpensives() + "zl");
 
 		chartBox.getChildren().add(chart);
 		chartBox.setPadding(new Insets(8, 8, 8, 8));
-		ConfigureView.mainBorderPane.setCenter(chartBox);
+		ConfigureView.mainBorderPane.setCenter(chartBox) ;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class MainApplicationView {
 
 		decisionBox.setPadding(new Insets(10));
 		decisionBox.setSpacing(8);
-		decisionBox.setPrefWidth(174);
+		decisionBox.setPrefWidth(154);
 		decisionBox.setStyle("-fx-background-color: #D4805D");
 
 		Button income = new Button("Income");

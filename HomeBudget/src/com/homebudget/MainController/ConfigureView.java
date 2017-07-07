@@ -42,7 +42,7 @@ public class ConfigureView {
 	static double xOffset = 0;
 	static double yOffset = 0;
 	public static ObservableList<String> costTypeItems = FXCollections.observableArrayList("Food", "Junk Food", "Car",
-			"Home", "Clothes", "Health", "Alcohol");
+			"Home", "Clothes", "Health", "Alcohol", "Parties");
 	public static ObservableList<String> tableColumnsNames = FXCollections.observableArrayList("Id", "Type", "Name", "Value", "Date");
 
 	// Log In Window fields
