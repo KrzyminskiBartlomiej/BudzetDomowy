@@ -34,6 +34,7 @@ public class DatabaseSubscription {
 
 	public static boolean checkPassword(String checkedUser, String passwordToBeChecked) {
 		Boolean checkResult = new Boolean(false);
+		DatabaseConnector mysqlConnect = new DatabaseConnector();
 		String sqlCheckPasswordQuery = "SELECT userPassword FROM usersBank WHERE userName='" + checkedUser + "';";
 		PreparedStatement statement;
 
@@ -48,6 +49,8 @@ public class DatabaseSubscription {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			mysqlConnect.disconnect();
 		}
 		return checkResult;
 	}
@@ -185,7 +188,6 @@ public class DatabaseSubscription {
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			createUserConnect.disconnect();

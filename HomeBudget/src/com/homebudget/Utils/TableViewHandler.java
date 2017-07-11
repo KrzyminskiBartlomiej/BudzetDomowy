@@ -28,7 +28,7 @@ import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
 public class TableViewHandler extends TableView {
-	private TableView tableView;
+	private static TableView tableView;
 	public static ObservableList<ObservableList> data;
 
 	/**
@@ -42,7 +42,7 @@ public class TableViewHandler extends TableView {
 	 */
 
 	@SuppressWarnings({ "unchecked" })
-	public void getAllData() {
+	public static void getAllData() {
 		tableView = new TableView();
 		String getAllDataQuery = "SELECT * FROM " + DatabaseConnector.getUserName() + "View";
 		PreparedStatement statement;

@@ -2,6 +2,7 @@ package com.homebudget.MainController;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
+import com.homebudget.Utils.TableViewHandler;
 import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Platform;
@@ -138,6 +139,7 @@ public class LogInView {
 			ConfigureView.userPasswordField.clear();
 			MainApplicationView mainView = new MainApplicationView();
 			mainView.setMainApplicationView(ConfigureView.window);
+			TableViewHandler.getAllData();
 			ConfigureView.window.setScene(ConfigureView.applicationScene);
 		} else
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 1.8,

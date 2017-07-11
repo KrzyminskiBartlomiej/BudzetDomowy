@@ -152,7 +152,6 @@ public class MainApplicationView {
 		TableViewHandler newTable = new TableViewHandler();
 		VBox tableBox = new VBox();
 		
-		newTable.getAllData();
 		newTable.setTableStyle();
 
 		tableBox.getChildren().add(newTable.getTable());
@@ -183,9 +182,8 @@ public class MainApplicationView {
 	public static void createChartView() {
 		VBox chartBox = new VBox();
 		ChartViewHandler pieChart = new ChartViewHandler();
-		TableViewHandler newTable = new TableViewHandler();
+		//TableViewHandler newTable = new TableViewHandler();
 
-		newTable.getAllData();
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
 		chart.setTitle("Your Expensives : " + pieChart.getSumOfAllExpensives() + "zl");

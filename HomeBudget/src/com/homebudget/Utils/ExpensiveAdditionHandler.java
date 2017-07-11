@@ -2,12 +2,13 @@ package com.homebudget.Utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.DataBaseHandler.DatabaseSubscription;
 import com.homebudget.MainController.ConfigureView;
 import com.homebudget.MainController.MainApplicationView;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -55,8 +56,7 @@ public class ExpensiveAdditionHandler {
 		Label costCreatorAlert = new Label("");
 		costCreatorAlert.setVisible(false);
 		costCreatorAlert.setTextAlignment(TextAlignment.CENTER);
-		costCreatorAlert.setMaxWidth(200);
-		;
+		costCreatorAlert.setMaxWidth(200);		
 
 		Button create = new Button("Create!");
 		create.setMaxWidth(200);
@@ -116,6 +116,24 @@ public class ExpensiveAdditionHandler {
 		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
 		TableViewHandler.tableRefresher();
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void addDescribedExpenseToDataTable(String costType, String costName, String costValue){
+		DateTimeFormatter currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		
+		ObservableList toBeInserted = FXCollections.observableArrayList();
+		toBeInserted.add(TableViewHandler.data.size() + 1);
+		toBeInserted.add(costType);
+		toBeInserted.add(costName);
+		toBeInserted.add(costValue);
+		toBeInserted.add(currentDate.format(localDate));
+		
+		TableViewHandler.data.add(TableViewHandler.data.size(), toBeInserted);
+		MainApplicationView goBack = new MainApplicationView();
+		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
+		TableViewHandler.tableRefresher();
+	}
 
 	/**
 	 * Checks if all mandatory field are correctly filled. If not it raises a
@@ -142,7 +160,7 @@ public class ExpensiveAdditionHandler {
 			DatabaseSubscription.showWarning(showTo, 1.8, "Set cost value!", "red");
 		else {
 			if (costValue.contains(",")) costValue = costValue.replace(",",".");			
-			addDescribedExpenseToDatabase(costType, costName, costValue);
+			addDescribedExpenseToDataTable(costType, costName, costValue);
 		}
 	}
 }
