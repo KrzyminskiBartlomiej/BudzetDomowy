@@ -3,6 +3,7 @@ package com.homebudget.Utils;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Stack;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
 import com.homebudget.MainController.ConfigureView;
@@ -12,6 +13,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -28,8 +31,9 @@ import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
 public class TableViewHandler extends TableView {
-	private static TableView tableView;
+	public static TableView tableView;
 	public static ObservableList<ObservableList> data;
+	public static Stack deletedLines;
 
 	/**
 	 * Used to get all data from user view. For now this method downloads all
@@ -77,11 +81,25 @@ public class TableViewHandler extends TableView {
 			}
 			tableView.setItems(data);
 			tableView.refresh();
+			
+			deletedLines = new Stack<>();
+			tableView.setUserData(deletedLines);
+			MenuItem deleteOne = new MenuItem("Delete cost");
+			deleteOne.setOnAction(e -> deleteRow());
+			
+			tableView.setContextMenu(new ContextMenu(deleteOne));
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void deleteRow(){
+		ObservableList item = data.get(tableView.getSelectionModel().getSelectedIndex());
+        if (item != null){ 
+            deletedLines.push(data.remove(item));
+        }
 	}
 
 	/**
