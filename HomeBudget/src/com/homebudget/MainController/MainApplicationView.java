@@ -92,7 +92,7 @@ public class MainApplicationView {
 
 		Button exit = new Button("Exit");
 		exit.setPrefSize(100, 20);
-		exit.setOnAction(e -> Platform.exit());
+		exit.setOnAction(e -> updateAndExit());
 
 		topMenu.getChildren().add(hbLogoView);
 		topMenu.getChildren().add(deleteUser);
@@ -143,7 +143,7 @@ public class MainApplicationView {
 	public static void createTableView() {
 		TableViewHandler newTable = new TableViewHandler();
 		VBox tableBox = new VBox();
-		
+
 		newTable.setTableStyle();
 
 		tableBox.getChildren().add(newTable.getTable());
@@ -151,7 +151,7 @@ public class MainApplicationView {
 
 		ConfigureView.mainBorderPane.setCenter(tableBox);
 	}
-	
+
 	/**
 	 * Creates PieChart for juxtaposition purposes.
 	 * 
@@ -160,7 +160,7 @@ public class MainApplicationView {
 	public static void createChartView() {
 		VBox chartBox = new VBox();
 		ChartViewHandler pieChart = new ChartViewHandler();
-		//TableViewHandler newTable = new TableViewHandler();
+		// TableViewHandler newTable = new TableViewHandler();
 
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
@@ -168,7 +168,7 @@ public class MainApplicationView {
 
 		chartBox.getChildren().add(chart);
 		chartBox.setPadding(new Insets(8, 8, 8, 8));
-		ConfigureView.mainBorderPane.setCenter(chartBox) ;
+		ConfigureView.mainBorderPane.setCenter(chartBox);
 	}
 
 	/**
@@ -196,6 +196,11 @@ public class MainApplicationView {
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
 
+	public static void updateAndExit() {
+		updateDatabase();
+		Platform.exit();
+	}
+
 	/**
 	 * Before it deletes user, it throws an alert to ensure if user is aware of
 	 * what happens. After positive user deletion it forwards user to logInView
@@ -218,5 +223,12 @@ public class MainApplicationView {
 			DatabaseSubscription.showWarning(ConfigureView.logInFailedInformation, 2.4,
 					"Your account has been deleted, see You again!", "green");
 		}
+	}
+
+	public static void updateDatabase() {
+		String updateAllCosts = new String("INSERT INTO " + DatabaseConnector.getUserName()
+				+ "View (typeCost, nameCost, valueCost, dateCost) VALUES (  )");
+		// DatabaseSubscription.executeNewUpdateQuery(updateAllCosts);
+
 	}
 }

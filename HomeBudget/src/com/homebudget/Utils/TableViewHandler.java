@@ -33,6 +33,7 @@ import javafx.util.Callback;
 public class TableViewHandler extends TableView {
 	public static TableView tableView;
 	public static ObservableList<ObservableList> data;
+	public static Integer boundaryFlag;
 	public static Stack deletedLines;
 
 	/**
@@ -71,7 +72,6 @@ public class TableViewHandler extends TableView {
 
 			while (rs.next()) {
 				ObservableList<String> row = FXCollections.observableArrayList();
-				
 				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 					row.add(rs.getString(i));
 				}
@@ -79,27 +79,27 @@ public class TableViewHandler extends TableView {
 				counter++;
 				data.add(row);
 			}
+			boundaryFlag = data.size();
 			tableView.setItems(data);
 			tableView.refresh();
-			
+
 			deletedLines = new Stack<>();
 			tableView.setUserData(deletedLines);
 			MenuItem deleteOne = new MenuItem("Delete cost");
 			deleteOne.setOnAction(e -> deleteRow());
-			
+
 			tableView.setContextMenu(new ContextMenu(deleteOne));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static void deleteRow(){
+
+	public static void deleteRow() {
 		ObservableList item = data.get(tableView.getSelectionModel().getSelectedIndex());
-        if (item != null){ 
-            deletedLines.push(data.remove(item));
-        }
+		if(tableView.getSelectionModel().getSelectedIndex() > boundaryFlag && item != null){
+			data.remove(item);
+		}
 	}
 
 	/**
