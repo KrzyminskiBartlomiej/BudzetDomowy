@@ -9,6 +9,8 @@ import com.homebudget.Utils.ExpensiveAdditionHandler;
 import com.homebudget.Utils.TableViewHandler;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -197,7 +199,9 @@ public class MainApplicationView {
 	}
 
 	public static void updateAndExit() {
-		updateDatabase();
+		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
+			updateDatabase();
+		}
 		Platform.exit();
 	}
 
@@ -225,10 +229,14 @@ public class MainApplicationView {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static void updateDatabase() {
-		String updateAllCosts = new String("INSERT INTO " + DatabaseConnector.getUserName()
-				+ "View (typeCost, nameCost, valueCost, dateCost) VALUES (  )");
-		// DatabaseSubscription.executeNewUpdateQuery(updateAllCosts);
+		ObservableList toBeUpdated = FXCollections.observableArrayList();
 
+		for (int i = TableViewHandler.boundaryFlag; i < TableViewHandler.data.size(); i++) {
+			toBeUpdated = TableViewHandler.data.get(i);
+			ExpensiveAdditionHandler.addDescribedExpenseToDatabase(toBeUpdated.get(1).toString(),
+					toBeUpdated.get(2).toString(), toBeUpdated.get(3).toString());
+		}
 	}
 }

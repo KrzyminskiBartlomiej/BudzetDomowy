@@ -112,9 +112,9 @@ public class ExpensiveAdditionHandler {
 		DatabaseSubscription.executeNewUpdateQuery(insertCostQuery);
 		DatabaseSubscription.executeNewUpdateQuery(updateUserViewQuery);
 
-		MainApplicationView goBack = new MainApplicationView();
-		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
-		TableViewHandler.tableRefresher();
+//		MainApplicationView goBack = new MainApplicationView();
+//		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
+//		TableViewHandler.tableRefresher();
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
