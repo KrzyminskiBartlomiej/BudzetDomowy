@@ -90,14 +90,14 @@ public class MainApplicationView {
 
 		Button logOut = new Button("Log Out");
 		logOut.setPrefSize(100, 20);
-		logOut.setOnAction(e -> ConfigureView.window.setScene(ConfigureView.logInScene));
+		logOut.setOnAction(e -> updateAndLogOut());
 
 		Button exit = new Button("Exit");
 		exit.setPrefSize(100, 20);
 		exit.setOnAction(e -> updateAndExit());
 
 		topMenu.getChildren().add(hbLogoView);
-		topMenu.getChildren().add(deleteUser);
+		//topMenu.getChildren().add(deleteUser);
 		topMenu.getChildren().add(logOut);
 		topMenu.getChildren().add(exit);
 
@@ -162,11 +162,13 @@ public class MainApplicationView {
 	public static void createChartView() {
 		VBox chartBox = new VBox();
 		ChartViewHandler pieChart = new ChartViewHandler();
-		// TableViewHandler newTable = new TableViewHandler();
 
 		pieChart.createDataForPieChart();
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
 		chart.setTitle("Your Expensives : " + pieChart.getSumOfAllExpensives() + "zl");
+		chart.setLegendVisible(false);
+		chart.setMaxHeight(Double.MAX_VALUE);
+		chart.setMaxWidth(Double.MAX_VALUE);
 
 		chartBox.getChildren().add(chart);
 		chartBox.setPadding(new Insets(8, 8, 8, 8));
@@ -189,7 +191,10 @@ public class MainApplicationView {
 		decisionBox.setStyle("-fx-background-color: #D4805D");
 
 		Button income = new Button("Income");
+		income.setPrefSize(130, 20);
+		
 		Button outcome = new Button("Outcome");
+		outcome.setPrefSize(130, 20);
 		outcome.setOnAction(e -> createExpensiveProcedure.createExpensive());
 
 		decisionBox.getChildren().add(income);
@@ -203,6 +208,13 @@ public class MainApplicationView {
 			updateDatabase();
 		}
 		Platform.exit();
+	}
+	
+	public static void updateAndLogOut() {
+		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
+			updateDatabase();
+		}
+		ConfigureView.window.setScene(ConfigureView.logInScene);
 	}
 
 	/**

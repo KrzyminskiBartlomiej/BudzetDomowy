@@ -97,7 +97,6 @@ public class TableViewHandler extends TableView {
 
 	public static void deleteRow() {
 		ObservableList item = data.get(tableView.getSelectionModel().getSelectedIndex());
-		System.out.printf("Number of highlighted row: %d", tableView.getSelectionModel().getSelectedIndex());
 		if(tableView.getSelectionModel().getSelectedIndex() + 1 > boundaryFlag && item != null){
 			data.remove(item);
 		}
