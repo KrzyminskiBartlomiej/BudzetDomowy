@@ -56,7 +56,7 @@ public class ExpensiveAdditionHandler {
 		Label costCreatorAlert = new Label("");
 		costCreatorAlert.setVisible(false);
 		costCreatorAlert.setTextAlignment(TextAlignment.CENTER);
-		costCreatorAlert.setMaxWidth(200);		
+		costCreatorAlert.setMaxWidth(200);
 
 		Button create = new Button("Create!");
 		create.setMaxWidth(200);
@@ -79,6 +79,42 @@ public class ExpensiveAdditionHandler {
 		decisionBox.getChildren().add(create);
 		decisionBox.getChildren().add(cancel);
 		decisionBox.getChildren().add(costCreatorAlert);
+
+		ConfigureView.mainBorderPane.setLeft(decisionBox);
+	}
+
+	public void createCategory() {
+		decisionBox = new VBox();
+		decisionBox.setPadding(new Insets(10));
+		decisionBox.setSpacing(8);
+		decisionBox.setPrefWidth(154);
+		decisionBox.setStyle("-fx-background-color: #D4805D");
+
+		Label costType = new Label("Category name");
+		TextField costTypeField = new TextField();
+
+		Label typeCreatorAlert = new Label("");
+		typeCreatorAlert.setVisible(false);
+		typeCreatorAlert.setTextAlignment(TextAlignment.CENTER);
+		typeCreatorAlert.setMaxWidth(200);
+
+		Button create = new Button("Create!");
+		create.setMaxWidth(200);
+		create.setAlignment(Pos.BOTTOM_CENTER);
+		create.setOnAction(e -> costTypeValidator(costTypeField.getText(), typeCreatorAlert));
+
+		MainApplicationView goBack = new MainApplicationView();
+
+		Button cancel = new Button("Cancel");
+		cancel.setMaxWidth(200);
+		cancel.setAlignment(Pos.BOTTOM_CENTER);
+		cancel.setOnAction(e -> ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu()));
+
+		decisionBox.getChildren().add(costType);
+		decisionBox.getChildren().add(costTypeField);
+		decisionBox.getChildren().add(create);
+		decisionBox.getChildren().add(cancel);
+		decisionBox.getChildren().add(typeCreatorAlert);
 
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
@@ -112,23 +148,23 @@ public class ExpensiveAdditionHandler {
 		DatabaseSubscription.executeNewUpdateQuery(insertCostQuery);
 		DatabaseSubscription.executeNewUpdateQuery(updateUserViewQuery);
 
-//		MainApplicationView goBack = new MainApplicationView();
-//		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
-//		TableViewHandler.tableRefresher();
+		// MainApplicationView goBack = new MainApplicationView();
+		// ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
+		// TableViewHandler.tableRefresher();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void addDescribedExpenseToDataTable(String costType, String costName, String costValue){
+	public static void addDescribedExpenseToDataTable(String costType, String costName, String costValue) {
 		DateTimeFormatter currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
-		
+
 		ObservableList toBeInserted = FXCollections.observableArrayList();
 		toBeInserted.add(TableViewHandler.data.size() + 1);
 		toBeInserted.add(costType);
 		toBeInserted.add(costName);
 		toBeInserted.add(costValue);
 		toBeInserted.add(currentDate.format(localDate));
-		
+
 		TableViewHandler.data.add(TableViewHandler.data.size(), toBeInserted);
 		MainApplicationView goBack = new MainApplicationView();
 		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
@@ -159,8 +195,34 @@ public class ExpensiveAdditionHandler {
 		else if (DatabaseSubscription.checkCredintialsLength(costValue, 0) == false)
 			DatabaseSubscription.showWarning(showTo, 1.8, "Set cost value!", "red");
 		else {
-			if (costValue.contains(",")) costValue = costValue.replace(",",".");			
+			if (costValue.contains(","))
+				costValue = costValue.replace(",", ".");
 			addDescribedExpenseToDataTable(costType, costName, costValue);
+		}
+	}
+
+	public void costTypeValidator(String costType, Label showTo) {
+		if (DatabaseSubscription.checkCredintialsLength(costType, 1) == false) {
+			DatabaseSubscription.showWarning(showTo, 1.8, "Fill category field!", "red");
+		} else if (ConfigureView.costTypeItems.contains(costType) == true) {
+			DatabaseSubscription.showWarning(showTo, 1.8, "Category already exist!", "red");
+		} else {
+			addCategoryToList(costType);
+		}
+	}
+
+	public static void addCategoryToList(String categoryName) {
+		ConfigureView.costTypeItems.add(categoryName);
+		MainApplicationView goBack = new MainApplicationView();
+		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
+	}
+
+	public static void updateCategoryInDB() {
+		String insertCostQuery = new String("");
+		for (int i = TableViewHandler.categoryFlag; i < ConfigureView.costTypeItems.size(); i++) {
+			insertCostQuery = "INSERT INTO costcategory (category, creator) VALUES ('"
+					+ ConfigureView.costTypeItems.get(i) + "', '" + DatabaseConnector.getUserName() + "');";
+			DatabaseSubscription.executeNewUpdateQuery(insertCostQuery);
 		}
 	}
 }

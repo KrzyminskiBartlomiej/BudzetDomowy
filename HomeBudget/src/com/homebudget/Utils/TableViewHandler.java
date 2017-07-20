@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Stack;
 
 import com.homebudget.DataBaseHandler.DatabaseConnector;
+import com.homebudget.DataBaseHandler.DatabaseGetData;
 import com.homebudget.MainController.ConfigureView;
 import com.homebudget.MainController.MainApplicationView;
 
@@ -34,6 +35,7 @@ public class TableViewHandler extends TableView {
 	public static TableView tableView;
 	public static ObservableList<ObservableList> data;
 	public static Integer boundaryFlag;
+	public static Integer categoryFlag;
 	public static Stack deletedLines;
 
 	/**
@@ -54,6 +56,7 @@ public class TableViewHandler extends TableView {
 		Integer counter = 1;
 
 		try {
+			DatabaseGetData.getCategoryNames();
 			statement = DatabaseConnector.connect().prepareStatement(getAllDataQuery);
 			ResultSet rs = statement.executeQuery();
 			data = FXCollections.observableArrayList();
@@ -80,6 +83,7 @@ public class TableViewHandler extends TableView {
 				data.add(row);
 			}
 			boundaryFlag = data.size();
+			categoryFlag = ConfigureView.costTypeItems.size();
 			tableView.setItems(data);
 			tableView.refresh();
 

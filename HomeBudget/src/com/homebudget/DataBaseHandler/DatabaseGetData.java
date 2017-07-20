@@ -1,11 +1,16 @@
 package com.homebudget.DataBaseHandler;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.homebudget.MainController.ConfigureView;
+
+import javafx.collections.FXCollections;
 
 /**
  * Public class used to aggregate methods responsible getting data from database
@@ -45,7 +50,7 @@ public class DatabaseGetData {
 	 *            stores name of column to work with
 	 * @throws SQLException
 	 *             in case of any unexpected database behavior
-	 *             
+	 * 
 	 */
 
 	public static void getStringData(ResultSet rs, String columnName) throws SQLException {
@@ -53,5 +58,26 @@ public class DatabaseGetData {
 			userName.clear();
 			userName.add(rs.getString(columnName));
 		}
+	}
+
+	public static void getCategoryNames() {
+		String getAllDataQuery = "SELECT category FROM costcategory WHERE creator = 'default' OR creator = '"
+				+ DatabaseConnector.getUserName() + "'";
+		PreparedStatement statement;
+		ConfigureView.costTypeItems = FXCollections.observableArrayList();
+
+		try {
+			statement = DatabaseConnector.connect().prepareStatement(getAllDataQuery);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+					ConfigureView.costTypeItems.add(rs.getString(i));
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 	}
 }

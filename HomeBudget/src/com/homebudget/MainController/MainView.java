@@ -3,6 +3,7 @@ package com.homebudget.MainController;
 import com.homebudget.Utils.TextEdit;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -34,6 +35,7 @@ public class MainView extends Application {
 		TextEdit textStyle = new TextEdit();
 		
 		primaryStage.initStyle(StageStyle.UNDECORATED);
+		primaryStage.getIcons().add(new Image("/HBLogo.png"));
 		
 		textStyle.setTextValue("Comic Sans MS", 14.0, 12.0, 16.0);
 		createUserView.setCreateUserWindow(primaryStage);

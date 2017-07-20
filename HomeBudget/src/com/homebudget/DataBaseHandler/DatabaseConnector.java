@@ -15,9 +15,9 @@ import java.util.Properties;
 
 public class DatabaseConnector {
 	private static String databaseDriver = "com.mysql.jdbc.Driver";
-	private static String databaseURL = "jdbc:mysql://localhost:3306/basiccosts?autoReconnect=true&useSSL=false";
-	private static String username = "root";
-	private static String password = "Spiderman143";
+	private static String databaseURL = "jdbc:mysql://192.168.1.100:3306/basiccosts?autoReconnect=true&useSSL=false";
+	private static String username = "Test";
+	private static String password = "test";
 	private static String maxPool = "250";
 
 	private static Connection connection;
@@ -89,8 +89,8 @@ public class DatabaseConnector {
 	 */
 	
 	public static void changeToAdmin(){
-		username = "root";
-		password = "Spiderman143";
+		username = "test";
+		password = "Test";
 	}
 
 	public static void setUsername(String un) {

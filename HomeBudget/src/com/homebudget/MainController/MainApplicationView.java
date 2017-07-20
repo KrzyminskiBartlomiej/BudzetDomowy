@@ -78,7 +78,7 @@ public class MainApplicationView {
 		topMenu.setSpacing(10);
 		topMenu.setStyle("-fx-background-color: #FBB496");
 
-		Image homeBudgetLogo = new Image("File:resources/HBLogo.png");
+		Image homeBudgetLogo = new Image("/HBLogo.png");
 		ImageView hbLogoView = new ImageView();
 		hbLogoView.setImage(homeBudgetLogo);
 		hbLogoView.setFitHeight(120);
@@ -97,7 +97,7 @@ public class MainApplicationView {
 		exit.setOnAction(e -> updateAndExit());
 
 		topMenu.getChildren().add(hbLogoView);
-		//topMenu.getChildren().add(deleteUser);
+		// topMenu.getChildren().add(deleteUser);
 		topMenu.getChildren().add(logOut);
 		topMenu.getChildren().add(exit);
 
@@ -192,13 +192,18 @@ public class MainApplicationView {
 
 		Button income = new Button("Income");
 		income.setPrefSize(130, 20);
-		
+
 		Button outcome = new Button("Outcome");
 		outcome.setPrefSize(130, 20);
 		outcome.setOnAction(e -> createExpensiveProcedure.createExpensive());
 
-		decisionBox.getChildren().add(income);
+		Button costType = new Button("Category");
+		costType.setPrefSize(130, 20);
+		costType.setOnAction(e -> createExpensiveProcedure.createCategory());
+
+		// decisionBox.getChildren().add(income);
 		decisionBox.getChildren().add(outcome);
+		decisionBox.getChildren().add(costType);
 
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
@@ -207,12 +212,20 @@ public class MainApplicationView {
 		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
 			updateDatabase();
 		}
+
+		if (ConfigureView.costTypeItems.size() > TableViewHandler.categoryFlag) {
+			ExpensiveAdditionHandler.updateCategoryInDB();
+		}
 		Platform.exit();
 	}
-	
+
 	public static void updateAndLogOut() {
 		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
 			updateDatabase();
+		}
+
+		if (ConfigureView.costTypeItems.size() > TableViewHandler.categoryFlag) {
+			ExpensiveAdditionHandler.updateCategoryInDB();
 		}
 		ConfigureView.window.setScene(ConfigureView.logInScene);
 	}
