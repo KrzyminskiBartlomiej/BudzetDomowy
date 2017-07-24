@@ -98,6 +98,11 @@ public class TableViewHandler extends TableView {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Deletes highlighted row from table.
+	 * 
+	 */
 
 	public static void deleteRow() {
 		ObservableList item = data.get(tableView.getSelectionModel().getSelectedIndex());

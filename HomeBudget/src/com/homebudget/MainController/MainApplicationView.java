@@ -208,6 +208,11 @@ public class MainApplicationView {
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
 
+	/**
+	 * Sends all changed data into database and turn off application.
+	 * 
+	 */
+
 	public static void updateAndExit() {
 		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
 			updateDatabase();
@@ -218,6 +223,11 @@ public class MainApplicationView {
 		}
 		Platform.exit();
 	}
+	
+	/**
+	 * Sends all changed data into database and log out application.
+	 * 
+	 */
 
 	public static void updateAndLogOut() {
 		if (TableViewHandler.data.size() > TableViewHandler.boundaryFlag) {
@@ -253,6 +263,11 @@ public class MainApplicationView {
 					"Your account has been deleted, see You again!", "green");
 		}
 	}
+	
+	/**
+	 * Sends all changed data from table into database.
+	 * 
+	 */
 
 	@SuppressWarnings("rawtypes")
 	public static void updateDatabase() {

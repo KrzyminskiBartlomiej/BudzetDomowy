@@ -83,6 +83,11 @@ public class ExpensiveAdditionHandler {
 		ConfigureView.mainBorderPane.setLeft(decisionBox);
 	}
 
+	/**
+	 * It updates region with expensive category creation (left side box).
+	 * 
+	 */
+
 	public void createCategory() {
 		decisionBox = new VBox();
 		decisionBox.setPadding(new Insets(10));
@@ -147,11 +152,21 @@ public class ExpensiveAdditionHandler {
 
 		DatabaseSubscription.executeNewUpdateQuery(insertCostQuery);
 		DatabaseSubscription.executeNewUpdateQuery(updateUserViewQuery);
-
-		// MainApplicationView goBack = new MainApplicationView();
-		// ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
-		// TableViewHandler.tableRefresher();
 	}
+
+	/**
+	 * Adds new described expense into data table. Refreshes tableView for
+	 * instant cost view. At the end it refreshes left side of BorderPane.
+	 * 
+	 * @param costType
+	 *            value from expensiveCategory, if there are no options marked
+	 *            it passes null
+	 * @param costName
+	 *            name of cost
+	 * @param costValue
+	 *            value of cost
+	 * 
+	 */
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addDescribedExpenseToDataTable(String costType, String costName, String costValue) {
@@ -172,7 +187,7 @@ public class ExpensiveAdditionHandler {
 	}
 
 	/**
-	 * Checks if all mandatory field are correctly filled. If not it raises a
+	 * Checks if all mandatory fields are correctly filled. If not it raises a
 	 * specific alert, otherwise it allows to create new outcome.
 	 * 
 	 * @param costType
@@ -201,6 +216,17 @@ public class ExpensiveAdditionHandler {
 		}
 	}
 
+	/**
+	 * Checks if all mandatory fields are correctly filled. If not it raises a
+	 * specific alert, otherwise it allows to create new category.
+	 * 
+	 * @param costType
+	 *            cost type to be created
+	 * @param showTo
+	 *            label where the warring will be shown
+	 * 
+	 */
+
 	public void costTypeValidator(String costType, Label showTo) {
 		if (DatabaseSubscription.checkCredintialsLength(costType, 1) == false) {
 			DatabaseSubscription.showWarning(showTo, 1.8, "Fill category field!", "red");
@@ -211,11 +237,24 @@ public class ExpensiveAdditionHandler {
 		}
 	}
 
+	/**
+	 * Adds category to list, refreshes left side of application.
+	 * 
+	 * @param categoryName
+	 *            category to be added
+	 * 
+	 */
+
 	public static void addCategoryToList(String categoryName) {
 		ConfigureView.costTypeItems.add(categoryName);
 		MainApplicationView goBack = new MainApplicationView();
 		ConfigureView.mainBorderPane.setLeft(goBack.addLeftBottomMenu());
 	}
+	
+	/**
+	 * Inserts new category into database.
+	 * 
+	 */
 
 	public static void updateCategoryInDB() {
 		String insertCostQuery = new String("");

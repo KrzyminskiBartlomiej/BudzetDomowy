@@ -60,6 +60,12 @@ public class DatabaseGetData {
 		}
 	}
 
+	/**
+	 * Gets category names from database and puts into costTypeItems container.
+	 * Created after optimization to work with local data.
+	 * 
+	 */
+
 	public static void getCategoryNames() {
 		String getAllDataQuery = "SELECT category FROM costcategory WHERE creator = 'default' OR creator = '"
 				+ DatabaseConnector.getUserName() + "'";
@@ -78,6 +84,6 @@ public class DatabaseGetData {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 }
