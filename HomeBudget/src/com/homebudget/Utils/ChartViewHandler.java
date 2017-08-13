@@ -1,7 +1,6 @@
 package com.homebudget.Utils;
 
 import java.util.List;
-
 import com.homebudget.MainController.ConfigureView;
 
 import javafx.beans.binding.Bindings;
@@ -29,15 +28,15 @@ public class ChartViewHandler {
 	 * 
 	 */
 
-	public void createDataForPieChart() {
+	public void createDataForPieChart(int dateSpan) {
 		pieChartData = FXCollections.observableArrayList();
 		sumOfAllExpensives = 0.0;
 		for (int i = 0; i < ConfigureView.costTypeItems.size(); i++) {
-			if (getSumForType(ConfigureView.costTypeItems.get(i)) != 0) {
+			if (getSumForType(ConfigureView.costTypeItems.get(i), dateSpan) != 0) {
 				pieChartData.add(new PieChart.Data(ConfigureView.costTypeItems.get(i),
-						getSumForType(ConfigureView.costTypeItems.get(i))));
+						getSumForType(ConfigureView.costTypeItems.get(i), dateSpan)));
 			}
-			sumOfAllExpensives += getSumForType(ConfigureView.costTypeItems.get(i));
+			sumOfAllExpensives += getSumForType(ConfigureView.costTypeItems.get(i), dateSpan);
 		}
 
 		pieChartData.forEach(
@@ -60,6 +59,12 @@ public class ChartViewHandler {
 		String sumData = (String) toSplit.get(place);
 		return sumData;
 	}
+	
+	public Integer getDateInt(List<?> toSplit){
+		String date = (String) toSplit.get(4);
+		int month = Integer.parseInt(date.substring(5,7));
+		return month;
+	}
 
 	/**
 	 * Creates a sum for given type.
@@ -70,11 +75,17 @@ public class ChartViewHandler {
 	 * 
 	 */
 
-	public Double getSumForType(String type) {
+	public Double getSumForType(String type, int dateSpan) {
 		Double sumResult = 0.00;
+		
 		for (int i = 0; i < TableViewHandler.data.size(); i++) {
 			if (type.equals(dataSplitter(TableViewHandler.data.get(i), 1))) {
-				sumResult += Double.parseDouble(dataSplitter(TableViewHandler.data.get(i), 3));
+				if(dateSpan == 0){
+					sumResult += Double.parseDouble(dataSplitter(TableViewHandler.data.get(i), 3));
+				}	
+				else if(dateSpan == getDateInt(TableViewHandler.data.get(i))){
+					sumResult += Double.parseDouble(dataSplitter(TableViewHandler.data.get(i), 3));
+				}
 			}
 		}
 		sumResult = Math.floor(sumResult * 100) / 100;

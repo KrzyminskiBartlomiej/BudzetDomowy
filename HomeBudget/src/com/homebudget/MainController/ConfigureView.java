@@ -43,6 +43,7 @@ public class ConfigureView {
 	static double yOffset = 0;
 	public static ObservableList<String> costTypeItems;
 	public static ObservableList<String> tableColumnsNames = FXCollections.observableArrayList("Id", "Type", "Name", "Value", "Date");
+	public static String currentMonth = "All";
 
 	// Log In Window fields
 	public static Scene logInScene;

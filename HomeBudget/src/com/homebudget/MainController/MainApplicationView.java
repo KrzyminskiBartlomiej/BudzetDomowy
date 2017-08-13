@@ -11,6 +11,7 @@ import com.homebudget.Utils.TableViewHandler;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
@@ -18,8 +19,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -128,7 +132,7 @@ public class MainApplicationView {
 
 		Button showJuxtaposition = new Button("Make Juxtaposition");
 		showJuxtaposition.setPrefSize(130, 20);
-		showJuxtaposition.setOnAction(e -> createChartView());
+		showJuxtaposition.setOnAction(e -> createChartView(0));
 		leftBottomMenu.getChildren().add(addNew);
 		leftBottomMenu.getChildren().add(showExpense);
 		leftBottomMenu.getChildren().add(showJuxtaposition);
@@ -159,20 +163,42 @@ public class MainApplicationView {
 	 * 
 	 */
 
-	public static void createChartView() {
+	public static void createChartView(int dateSpan) {
 		VBox chartBox = new VBox();
 		ChartViewHandler pieChart = new ChartViewHandler();
 
-		pieChart.createDataForPieChart();
+		pieChart.createDataForPieChart(dateSpan);
 		final PieChart chart = new PieChart(ChartViewHandler.pieChartData);
-		chart.setTitle("Your Expensives : " + pieChart.getSumOfAllExpensives() + "zl");
+		chart.setTitle("Your " + ConfigureView.currentMonth + " expensives equals: " + pieChart.getSumOfAllExpensives()
+				+ "zl");
 		chart.setLegendVisible(false);
 		chart.setMaxHeight(Double.MAX_VALUE);
 		chart.setMaxWidth(Double.MAX_VALUE);
 
 		chartBox.getChildren().add(chart);
 		chartBox.setPadding(new Insets(8, 8, 8, 8));
+
+		ContextMenu monthPicker = new ContextMenu();
+		MenuItem allData = new MenuItem("All");
+		allData.setOnAction(e -> refreshChartView(0, "all"));
+		MenuItem july = new MenuItem("July");
+		july.setOnAction(e -> refreshChartView(7, "July"));
+		MenuItem august = new MenuItem("August");
+		august.setOnAction(e -> refreshChartView(8, "August"));
+
+		monthPicker.getItems().addAll(allData, july, august);
+		chartBox.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+			public void handle(ContextMenuEvent event) {
+				monthPicker.show(chartBox, event.getScreenX(), event.getScreenY());
+			}
+		});
+
 		ConfigureView.mainBorderPane.setCenter(chartBox);
+	}
+	
+	public static void refreshChartView(int dateSpan, String month){
+		ConfigureView.currentMonth = month;
+		createChartView(dateSpan);
 	}
 
 	/**
@@ -223,7 +249,7 @@ public class MainApplicationView {
 		}
 		Platform.exit();
 	}
-	
+
 	/**
 	 * Sends all changed data into database and log out application.
 	 * 
@@ -263,7 +289,7 @@ public class MainApplicationView {
 					"Your account has been deleted, see You again!", "green");
 		}
 	}
-	
+
 	/**
 	 * Sends all changed data from table into database.
 	 * 
