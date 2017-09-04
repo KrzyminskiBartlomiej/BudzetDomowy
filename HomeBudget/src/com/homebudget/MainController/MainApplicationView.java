@@ -185,8 +185,10 @@ public class MainApplicationView {
 		july.setOnAction(e -> refreshChartView(7, "July"));
 		MenuItem august = new MenuItem("August");
 		august.setOnAction(e -> refreshChartView(8, "August"));
+		MenuItem september = new MenuItem("September");
+		september.setOnAction(e -> refreshChartView(9, "September"));
 
-		monthPicker.getItems().addAll(allData, july, august);
+		monthPicker.getItems().addAll(allData, july, august, september);
 		chartBox.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 			public void handle(ContextMenuEvent event) {
 				monthPicker.show(chartBox, event.getScreenX(), event.getScreenY());
